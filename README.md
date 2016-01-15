@@ -2,7 +2,7 @@
 
 This is an application that allows users to find and enjoy outdoor recreational areas. 
 
-## Project Setup
+## Installations
 
 Before you set up the application, you should make sure that the following is installed on your machine:
 
@@ -24,7 +24,7 @@ and install Node.js if you have not installed it on your computer.
 
 The installation of MongoDB is tricky. Be sure to follow the steps given here:
 
-1. Mac
+### Mac
 
 There are two ways to install. We will take the approach of doing it with homebrew, the depedency manager
 of OSX.
@@ -47,14 +47,15 @@ Let's do a quick sanity check to make sure that MongoDB is actually installed. E
 $ which mongod                                                                     
 ```
 
-Now, we are not yet finished. MongoDB needs a data folder so let's create it. 
-In your terminal execute the following:
+This will give you a path indicating that mongo is indeed installed. 
+
+Now, we are not yet finished. MongoDB needs a data folder so let's create it. In your terminal execute the following:
 
 ```bash 
 $ sudo mkdir -p /data/db
 ```
 
-Next, change the permissions of that data directory is readable and writable:
+Next, change the permissions of that data directory to being readable and writable:
 
 ```bash 
 $ sudo chmod 777 /data/db
@@ -69,6 +70,39 @@ $ mongod
 You will see lots of output. And something like: "waiting for connections on port 27017..."
 
 To shut down the server, hit ctrl + C 2 times. 
+
+
+Now that you have installed all the neccessary components to make the project work, we can go ahead and set up the project. 
+
+## Project Setup
+
+First, go to a directory on the computer that you want to put the project in and execute the following:
+
+```bash
+$ git clone https://github.com/Wanderus/Wanderus
+```
+Now, the project won't run now since we don't have all the node_modules required. Go inside the project root and execute the following:
+
+```bash
+$ npm install 
+```
+npm grabs all of the dependencies listed in package.json and adds it to the project. 
+
+Now, start the MongoDB server with this command:
+
+```bash
+$ mongod
+```
+
+Finally, to start the project, excute the following:
+
+```bash
+$ npm start
+```
+
+This starts the project and uses port 3000 as a default. Go into the browser and visit http://localhost:3000. You should see the root page of the project!
+
+Congratualations! You made it to the end. To terminate the server, hit Ctrl + C. Note that you should also terminate mongoDB as well. The command is given earlier in the walkthrough. 
 
 
 
