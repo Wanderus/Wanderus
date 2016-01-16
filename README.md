@@ -140,3 +140,14 @@ $ npm start
 This starts the project and uses port 3000 as a default. Go into the browser and visit http://localhost:3000. You should see the root page of the project!
 
 Congratualations! You made it to the end. To terminate the server, hit Ctrl + C. Note that you should also terminate mongoDB as well. The command is given earlier in the walkthrough.
+
+
+## Updating Repository
+
+Whenever changes are made, you want to pull down the latest version of the project from github:
+
+Finally, to start the project, execute the following:
+
+```bash
+$ git pull origin master
+```
