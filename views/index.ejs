@@ -6,19 +6,9 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     </head>
     <body ng-app="angularApp">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Wanderus</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Search</a></li>
-                </ul>
-            </div>
-        </nav>
+        <div ng-include src="'/header/header.ejs'"></div>
         <div ng-controller="MainCtrl">
-            Hello {{name}}!
+            Welcome to Wanderus!
 
 
         </div>
