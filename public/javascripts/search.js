@@ -1,39 +1,68 @@
 var app = angular.module('searchFunction', ['ngResource']);
 
-app.controller('MainCtrl', ['$scope', '$resource', '$http', function($scope, $resource, $http) {
+/*
+app.factory('searchResults', ['$http', function($http) {
 
-    /*
-    $scope.query = $resource("http://api.geonames.org/searchJSON?q=dc&maxRows=10&username=rhsu0268");
+    var searchResultsService = {
+        results: []
+    };
+
+    searchResultsService.get = function()
+    {
+
+        return $http.get("http://api.geonames.org/searchJSON?q=dc&maxRows=10&username=rhsu0268")
+            .success(function(data)
+            {
+
+                //console.log(data);
+                angular.copy(data, searchResultsService.results);
+                console.log(searchResultsService.results);
+                //searchResults = data;
+
+            });
+    };
+
+    return searchResultsService;
+
+}]);
+*/
+
+app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+
 
 
     $scope.getData = function()
     {
-        $scope.queryResult = $scope.query.get();
 
-        var result = angular.fromJson($scope.queryResult);
-        console.log(result);
-    }
-    */
-
-
-    $scope.getData = function()
-    {
         $http({method: 'GET', url: 'http://api.geonames.org/searchJSON?q=dc&maxRows=10&username=rhsu0268'})
             .success(function(data, status)
             {
-                $scope.queryResult = data;
+                $scope.queryResult = data.geonames;
                 console.log(data.geonames);
+                /*
+                for (var i = 0; i < $scope.queryResult.length; i++)
+                {
+                    console.log($scope.queryResult[i]);
+                }
+                */
+
+
+                var areaArray = [];
+                for (var area in $scope.queryResult.geonames)
+                {
+                    var tempObj = $scope.queryResult.geonames[area];
+                    areaArray.push(tempObj);
+                }
+
+                console.log(areaArray);
+
             })
             .error(function(data, status) {
                 alert("Error");
             });
+
+
     }
-
-
-    //console.log($scope.queryResult.geonames);
-
-
-
 
 
 }]);
