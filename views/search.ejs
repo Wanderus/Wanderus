@@ -9,7 +9,7 @@
         <div ng-include src="'/header/header.ejs'"></div>
         <div ng-controller="MainCtrl">
             <h2>Search Functionality</h2>
-            <form>
+            <form ng-submit="getData()">
                 <div class="form-group">
                     <input type="email" class="form-control" id="searchTerm" placeholder="Search...">
                 </div>
@@ -17,7 +17,9 @@
 
                 <button type="submit" class="btn btn-default">Go</button>
             </form>
-
+            <div id="result">
+                {{queryResult}}
+            </div>
 
 
         </div>
@@ -28,6 +30,7 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+        <script src="//code.angularjs.org/1.3.0-rc.2/angular-resource.min.js"></script>
         <script src="/javascripts/search.js"></script>
 
     </body>
