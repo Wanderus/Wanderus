@@ -2,43 +2,45 @@
 <html>
     <head>
         <title>Wanderus</title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel='stylesheet' href='/stylesheets/search.css' />
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     </head>
     <body ng-app="searchFunction">
-        <div ng-include src="'/header/header.ejs'"></div>
-        <div ng-controller="MainCtrl">
-            <h2>Search Functionality</h2>
-            <form>
-                <div class="error" ng-show="error">Your query yields no results! Please try again.</div>
-                <div class="form-group">
-                    <label>Placename</label>
-                    <input type="text" class="form-control" id="searchTerm" placeholder="Search..." ng-model="place">
-                </div>
-                <div class="form-group">
-                    <label>State</label>
-                    <input type="text" class="form-control" id="state" placeholder="Search..." ng-model="state">
-                </div>
-
-
-                <button type="submit" class="btn btn-default" ng-click="getData()">Go</button>
-            </form>
-            <div id="result">
-                <ul>
-                    <div ng-repeat="result in queryResult">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                {{result.name}}
-                            </div>
-                            <div class="panel-footer">State: {{result.adminName1}}</div>
-                            <div class="panel-footer">fclName: {{result.fclName}}</div>
-
-                        </div>
+        <div class="container">
+            <div ng-include src="'/header/header.ejs'"></div>
+            <div ng-controller="MainCtrl">
+                <h2>Search Functionality</h2>
+                <form>
+                    <div class="error" ng-show="error">Your query yields no results! Please try again.</div>
+                    <div class="form-group">
+                        <label>Placename</label>
+                        <input type="text" class="form-control" id="searchTerm" placeholder="Search..." ng-model="place">
                     </div>
-                </ul>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="text" class="form-control" id="state" placeholder="Search..." ng-model="state">
+                    </div>
+
+
+                    <button type="submit" class="btn btn-default" ng-click="getData()">Go</button>
+                </form>
+                <div id="result">
+                        <div ng-repeat="result in queryResult">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    {{result.name}}
+                                </div>
+                                <div class="panel-footer">State: {{result.adminName1}}</div>
+                                <div class="panel-footer">fclName: {{result.fclName}}</div>
+
+                            </div>
+                        </div>
+                </div>
+                <div id="map"></div>
+
+
             </div>
-
-
         </div>
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -49,6 +51,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
         <script src="//code.angularjs.org/1.3.0-rc.2/angular-resource.min.js"></script>
         <script src="/javascripts/search.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
     </body>
 </html>
