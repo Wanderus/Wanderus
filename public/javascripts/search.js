@@ -33,12 +33,19 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 
     $scope.getData = function()
     {
+        var place = $scope.place;
+        var encodePlace = encodeURI(place);
 
-        $http({method: 'GET', url: 'http://api.geonames.org/searchJSON?q=dc&maxRows=10&username=rhsu0268'})
+        // build the query string
+        var query = 'http://api.geonames.org/postalCodeLookupJSON?placename=' + encodePlace + '&country=US' + '&username=rhsu0268';
+        console.log(query);
+
+
+        $http({method: 'GET', url: query})
             .success(function(data, status)
             {
-                $scope.queryResult = data.geonames;
-                console.log(data.geonames);
+                $scope.queryResult = data.postalcodes;
+                console.log(data.postalcodes);
                 /*
                 for (var i = 0; i < $scope.queryResult.length; i++)
                 {
@@ -48,9 +55,9 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 
 
                 var areaArray = [];
-                for (var area in $scope.queryResult.geonames)
+                for (var area in $scope.queryResult.postalcodes)
                 {
-                    var tempObj = $scope.queryResult.geonames[area];
+                    var tempObj = $scope.queryResult.postalcodes[area];
                     areaArray.push(tempObj);
                 }
 
