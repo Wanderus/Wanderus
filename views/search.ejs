@@ -10,9 +10,14 @@
         <div ng-controller="MainCtrl">
             <h2>Search Functionality</h2>
             <form>
+                <div class="error" ng-show="error">Your query yields no results! Please try again.</div>
                 <div class="form-group">
                     <label>Placename</label>
                     <input type="text" class="form-control" id="searchTerm" placeholder="Search..." ng-model="place">
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" class="form-control" id="state" placeholder="Search..." ng-model="state">
                 </div>
 
 
@@ -23,11 +28,11 @@
                     <div ng-repeat="result in queryResult">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                {{result.placeName}}
+                                {{result.name}}
                             </div>
                             <div class="panel-footer">State: {{result.adminName1}}</div>
                             <div class="panel-footer">Postal Code: {{result.postalcode}}</div>
-                            
+
                         </div>
                     </div>
                 </ul>
