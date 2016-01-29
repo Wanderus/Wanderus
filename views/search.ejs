@@ -21,7 +21,14 @@
             <div id="result">
                 <ul>
                     <div ng-repeat="result in queryResult">
-                        <li>{{result}}</li>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {{result.placeName}}
+                            </div>
+                            <div class="panel-footer">State: {{result.adminName1}}</div>
+                            <div class="panel-footer">Postal Code: {{result.postalcode}}</div>
+                            
+                        </div>
                     </div>
                 </ul>
             </div>
