@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var SavedSearchSchema = new mongoose.Schema({
 
-    placeName: String,
+    placename: String,
     state: String
 
 
