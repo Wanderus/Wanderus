@@ -14,6 +14,9 @@ var app = express();
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/wanderus');
 
+// require the relevant models
+require('./models/SavedSearches');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
