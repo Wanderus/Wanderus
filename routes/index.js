@@ -32,7 +32,7 @@ var SavedSearch = mongoose.model('SavedSearch');
 router.get('/createSavedSearch', function(req, res, next) {
 
     var search = new SavedSearch();
-    search.placename = "Disney Land";
+    search.placename = "Disney World";
     search.state = "California";
 
 

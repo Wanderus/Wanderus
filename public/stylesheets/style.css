@@ -1,8 +1,37 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  color: #00000;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   color: #00B7FF;
+}
+
+h1 {
+    letter-spacing: .75em;
+}
+
+.divider {
+    height:50px;
+}
+
+section {
+    height:600px;
+    padding-top:80px;
+    padding-bottom:50px;
+    overflow:auto;
+}
+
+.bg-1 {
+	background: url('http://i63.tinypic.com/m39mt.jpg') no-repeat center center fixed;
+    color:#066f44;
+    background-size:cover;
 }
