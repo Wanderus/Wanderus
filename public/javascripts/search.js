@@ -47,23 +47,25 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
     {
         $scope.error = false;
         var place = $scope.place;
-        var state = $scope.state;
+        //var state = $scope.state;
 
         var encodePlace = encodeURI(place);
+        var dc = encodeURI("Washington, D.C.")
         var query;
 
+        /*
         if (state)
         {
-            query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US&adminCode1=' + state + '&username=rhsu0268';
+            query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminName1=' + dc + '&username=rhsu0268';
         }
-        else
-        {
-            // build the query string
-            //var query = 'http://api.geonames.org/postalCodeLookupJSON?placename=' + encodePlace + '&country=US' + '&username=rhsu0268';
-            query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&username=rhsu0268';
-            console.log(query);
+        */
 
-        }
+        // build the query string
+        //var query = 'http://api.geonames.org/postalCodeLookupJSON?placename=' + encodePlace + '&country=US' + '&username=rhsu0268';
+        query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminCode1=DC' + '&username=rhsu0268';
+        console.log(query);
+
+
 
         $http({method: 'GET', url: query})
             .success(function(data, status)
