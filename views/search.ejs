@@ -26,16 +26,19 @@
                     <button type="submit" class="btn btn-default" ng-click="getData()">Go</button>
                 </form>
                 <div id="result">
-                        <div ng-repeat="result in queryResult">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    {{result.name}}
-                                </div>
-                                <div class="panel-footer">State: {{result.adminName1}}</div>
-                                <div class="panel-footer">fclName: {{result.fclName}}</div>
-
+                    <div ng-show="resultsCount">
+                        Your query yielded {{resultsCount}} results.
+                    </div>
+                    <div ng-repeat="result in queryResult">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {{result.name}}
                             </div>
+                            <div class="panel-footer">State: {{result.adminName1}}</div>
+                            <div class="panel-footer">fclName: {{result.fclName}}</div>
+
                         </div>
+                    </div>
                 </div>
                 <div id="map"></div>
 

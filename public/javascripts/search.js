@@ -45,6 +45,13 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 
     $scope.getData = function()
     {
+
+        // clear the results
+        /*
+        var resultElement = angular.element(document.querySelector('#result'));
+        resultElement.empty();
+        */
+
         $scope.error = false;
         var place = $scope.place;
         //var state = $scope.state;
@@ -75,10 +82,17 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
                 {
                     $scope.error = true;
                     console.log("Sorry, your search yields no results");
+                    $scope.resultsCount = 0;
+                    $scope.queryResult = null;
                     return;
                 }
+
+                // track the number of results
+                $scope.resultsCount = data.totalResultsCount;
+
                 $scope.queryResult = data.geonames;
                 console.log($scope.queryResult);
+
 
 
 
