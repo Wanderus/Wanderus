@@ -1,4 +1,4 @@
-var app = angular.module('searchFunction', ['ngResource' ]);
+var app = angular.module('searchFunction', ['ngResource', 'ui.router' ]);
 
 /*
 app.factory('searchResults', ['$http', function($http) {
@@ -26,6 +26,20 @@ app.factory('searchResults', ['$http', function($http) {
 
 }]);
 */
+
+
+app.config([
+    '$stateProvider',
+    function($stateProvider)
+    {
+        $stateProvider.state('search', {
+            url: '',
+            templateUrl: '/searchPage.html',
+            controller: 'MainCtrl'
+
+        });
+    }
+]);
 
 app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 
