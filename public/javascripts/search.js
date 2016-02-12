@@ -1,4 +1,4 @@
-var app = angular.module('searchFunction', ['ngResource']);
+var app = angular.module('searchFunction', ['ngResource' ]);
 
 /*
 app.factory('searchResults', ['$http', function($http) {
