@@ -38,6 +38,13 @@ app.config([
             controller: 'MainCtrl'
 
         });
+
+        $stateProvider.state('searchResult', {
+            url: '/results',
+            templateUrl: '/searchResult.html',
+            controller: 'ResultsCtrl'
+
+        });
     }
 ]);
 
@@ -116,6 +123,11 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
             });
 
     }
+
+
+}]);
+
+app.controller('ResultsCtrl', ['$scope', '$http', function($scope, $http) {
 
 
 }]);

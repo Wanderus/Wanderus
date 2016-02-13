@@ -11,42 +11,10 @@
             <div ng-include src="'/header/header.ejs'"></div>
             <ui-view></ui-view>
             <script type="text/ng-template" id="/searchPage.html">
-
-                <h2>Search Functionality</h2>
-                <form>
-                    <div class="error" ng-show="error">Your query yields no results! Please try again.</div>
-                    <div class="form-group">
-                        <label>Placename</label>
-                        <input type="text" class="form-control" id="searchTerm" placeholder="Search..." ng-model="place">
-                    </div>
-                    <div class="form-group">
-                        <label>State</label>
-                        <input type="text" class="form-control" id="state" placeholder="Search..." ng-model="state">
-                    </div>
-
-
-                    <button type="submit" class="btn btn-default" ng-click="getData()">Go</button>
-                </form>
-                <div id="result">
-                    <div ng-show="resultsCount">
-                        Your query yielded {{resultsCount}} results.
-                    </div>
-                    <div ng-repeat="result in queryResult">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                {{result.name}}
-                            </div>
-                            <div class="panel-footer">State: {{result.adminName1}}</div>
-                            <div class="panel-footer">fclName: {{result.fclName}}</div>
-                            <button type="button" class="btn btn-primary">Details</button>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div id="map"></div>
-
-
+                <%- include searchPage.html %>
+            </script>
+            <script type="text/ng-template" id="/searchResult.html">
+                <%- include searchResult.html %>
             </script>
         </div>
         <!-- jQuery library -->
