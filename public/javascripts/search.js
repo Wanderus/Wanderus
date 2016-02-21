@@ -119,6 +119,8 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', function($scope, $http,
                 $scope.queryResult = data.geonames;
                 console.log($scope.queryResult);
 
+                calculatePages($scope.resultsCount);
+
 
 
 
@@ -134,6 +136,11 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', function($scope, $http,
         $state.go('searchResult', {result: searchResult});
     }
 
+    $scope.getNext = function()
+    {
+        console.log("getNext is called!");
+    }
+
 
 }]);
 
@@ -141,3 +148,8 @@ app.controller('ResultsCtrl', ['$scope', '$http', function($scope, $http) {
     console.log(result);
 
 }]);
+
+function calculatePages(resultsCount)
+{
+    console.log(resultsCount);
+}
