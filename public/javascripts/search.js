@@ -1,4 +1,5 @@
-var app = angular.module('searchFunction', ['ngResource', 'ui.router' ]);
+
+var app = angular.module('searchFunction', ['ngResource', 'ui.router']);
 
 /*
 app.factory('searchResults', ['$http', function($http) {
@@ -30,7 +31,8 @@ app.factory('searchResults', ['$http', function($http) {
 
 app.config([
     '$stateProvider',
-    function($stateProvider)
+    '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider)
     {
         $stateProvider.state('search', {
             url: '',
@@ -41,14 +43,17 @@ app.config([
 
         $stateProvider.state('searchResult', {
             url: '/results',
+            controller: 'ResultsCtrl',
             templateUrl: '/searchResult.html',
-            controller: 'ResultsCtrl'
+
 
         });
+
+        $urlRouterProvider.otherwise('search');
     }
 ]);
 
-app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('MainCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
 
     $scope.error = false;
 
@@ -124,10 +129,15 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 
     }
 
+    $scope.goToResult = function(searchResult)
+    {
+        $state.go('searchResult', {result: searchResult});
+    }
+
 
 }]);
 
 app.controller('ResultsCtrl', ['$scope', '$http', function($scope, $http) {
-
+    console.log(result);
 
 }]);
