@@ -53,7 +53,7 @@ app.config([
     }
 ]);
 
-app.controller('MainCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+app.controller('MainCtrl', ['$scope', '$http', '$state', '$sce', function($scope, $http, $state, $sce) {
 
     $scope.error = false;
 
@@ -119,7 +119,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', function($scope, $http,
                 $scope.queryResult = data.geonames;
                 console.log($scope.queryResult);
 
-                calculatePages($scope.resultsCount);
+                //var numberOfPages = calculatePages($scope.resultsCount);
 
 
 
@@ -141,6 +141,15 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', function($scope, $http,
         console.log("getNext is called!");
     }
 
+    /*
+    $scope.listElements = function()
+    {
+        var numberOfPages = calculatePages($scope.resultsCount);
+        console.log(numberOfPages);
+        var html = "<h1>Hello</h1>";
+        return $sce.trustAsHtml(html);
+    }
+    */
 
 }]);
 
@@ -151,5 +160,6 @@ app.controller('ResultsCtrl', ['$scope', '$http', function($scope, $http) {
 
 function calculatePages(resultsCount)
 {
-    console.log(resultsCount);
+    console.log(Math.round(resultsCount / 10));
+    return Math.round(resultsCount / 10);
 }

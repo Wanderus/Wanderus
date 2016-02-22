@@ -22,6 +22,10 @@ router.get('/search', function(req, res, next) {
   res.render('search', { title: 'Express' });
 });
 
+router.get('/paginationDemo', function(req, res, next) {
+  res.render('paginationDemo', { title: 'Express' });
+});
+
 
 
 // these are the routes for a sample collection - (we may change these later to fit our needs)
