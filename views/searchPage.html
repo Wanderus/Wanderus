@@ -41,7 +41,13 @@
 </form>
 <div id="result">
     <div ng-show="resultsCount">
-        Your query yielded {{resultsCount}} results.
+        <!--Your query yielded {{resultsCount}} results.-->
+        Your query yielded {{resultsCount}}
+        <ng-pluralize count="resultsCount"
+        when=
+        "{'1': 'result',
+        'other': 'results'}">
+        </ng-pluralize>.
     </div>
     <div ng-repeat="result in queryResult">
         <div class="panel panel-default">

@@ -100,6 +100,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
         $scope.error1 = false;
         $scope.error2 = false;
         $scope.error3 = false;
+        $scope.resultsCount = 0;
         var place = $scope.place;
         var state = $scope.state;
         var feature = $scope.feature;
@@ -119,7 +120,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
         }
 
 
-        if (state)
+        if (state && !feature)
         {
             // define some patterns to match
             var regex1 = /dc/i;
