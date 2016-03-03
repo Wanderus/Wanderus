@@ -99,8 +99,11 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
 
         $scope.error1 = false;
         $scope.error2 = false;
+        $scope.error3 = false;
         var place = $scope.place;
         var state = $scope.state;
+        var feature = $scope.feature;
+        console.log("Feature:" + feature);
 
         var encodePlace = encodeURI(place);
         var dc = encodeURI("Washington, D.C.")
@@ -134,6 +137,12 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
 
             query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminCode1=DC' + '&username=rhsu0268';
         }
+        else if (feature)
+        {
+            console.log("You chose a feature.");
+
+            query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminCode1=DC' + '&fcode=' + feature + '&username=rhsu0268';
+        }
         else
         {
             // build the query string - be sure results are only from DC
@@ -149,7 +158,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
                 console.log(data);
                 if (data.geonames.length == 0)
                 {
-                    $scope.error2 = true;
+                    $scope.error3 = true;
                     console.log("We currently support only Washington, DC and will be adding more cities to Wander soon!");
                     $scope.resultsCount = 0;
                     $scope.queryResult = null;

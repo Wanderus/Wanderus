@@ -2,17 +2,19 @@
 <form>
     <div class="error" ng-show="error1">You must enter text into the fields to get results!</div>
     <div class="error" ng-show="error2">We currently support only Washington, DC and will be adding more cities to Wander soon!</div>
+    <div class="error" ng-show="error3">No results found! Try again!</div>
     <div class="form-group">
         <label>Placename</label>
         <input type="text" class="form-control" id="searchTerm" placeholder="Search..." ng-model="place">
     </div>
     <div class="form-group">
         <label>State, City, Zipcode</label>
-        <input type="text" class="form-control" id="state" placeholder="Search..." ng-model="state">
+        <input type="text" class="form-control" id="state" placeholder="" ng-model="state">
     </div>
     <div class="form-group">
         <label>Special Feature</label>
            <select class="form-control" ng-model="feature">
+               <option value=""></option>
                <option value="FISH">Fishing Area</option>
                <option value="FLLSX">Waterfall</option>
                <option value="SPNG">Spring</option>
