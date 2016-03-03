@@ -75,7 +75,6 @@ app.factory('userQuery', [function() {
 
 app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($scope, $http, $state, userQuery) {
 
-    $scope.error = false;
 
     var map = L.map('map').setView([38.907347, -77.036591], 13);
 
@@ -98,18 +97,42 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
         resultElement.empty();
         */
 
-        $scope.error = false;
+        $scope.error1 = false;
+        $scope.error2 = false;
         var place = $scope.place;
-        //var state = $scope.state;
+        var state = $scope.state;
 
         var encodePlace = encodeURI(place);
         var dc = encodeURI("Washington, D.C.")
         var query;
 
+        if (!place && !state)
+        {
+            $scope.error1 = true;
+            console.log("You must enter text into the fields to get results!");
+            $scope.resultsCount = 0;
+            $scope.queryResult = null;
+            return;
+        }
+
 
         if (state)
         {
-            query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminName1=' + dc + '&username=rhsu0268';
+            // define some patterns to match
+            var regex1 = /dc/i;
+            var regex2 = /washington dc/i;
+            var regex3 = /washington d.c./i;
+            if (!regex1.test(state) && !regex2.test(state) && !regex3.test(state))
+            {
+                $scope.error2 = true;
+                console.log("We currently support only Washington, DC and will be adding more cities to Wander soon!");
+                $scope.resultsCount = 0;
+                $scope.queryResult = null;
+                return;
+            }
+
+
+            query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminCode1=DC' + '&username=rhsu0268';
         }
         else
         {
@@ -126,7 +149,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
                 console.log(data);
                 if (data.geonames.length == 0)
                 {
-                    $scope.error = true;
+                    $scope.error2 = true;
                     console.log("We currently support only Washington, DC and will be adding more cities to Wander soon!");
                     $scope.resultsCount = 0;
                     $scope.queryResult = null;

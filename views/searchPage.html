@@ -1,6 +1,7 @@
 <h2>Search Functionality</h2>
 <form>
-    <div class="error" ng-show="error">We currently support only Washington, DC and will be adding more cities to Wander soon!</div>
+    <div class="error" ng-show="error1">You must enter text into the fields to get results!</div>
+    <div class="error" ng-show="error2">We currently support only Washington, DC and will be adding more cities to Wander soon!</div>
     <div class="form-group">
         <label>Placename</label>
         <input type="text" class="form-control" id="searchTerm" placeholder="Search..." ng-model="place">
@@ -61,7 +62,7 @@
   </div>
 </div>
 
-<div ng-controller="OtherController" class="other-controller">
+<div ng-controller="OtherController" class="other-controller" ng-show="resultsCount">
   <small>this is in "OtherController"</small>
   <div class="text-center">
   <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" <%- include dirPagination.tpl.html %></dir-pagination-controls>
