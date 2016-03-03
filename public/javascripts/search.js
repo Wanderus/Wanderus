@@ -106,18 +106,18 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
         var dc = encodeURI("Washington, D.C.")
         var query;
 
-        /*
+
         if (state)
         {
             query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminName1=' + dc + '&username=rhsu0268';
         }
-        */
-
-        // build the query string
-        //var query = 'http://api.geonames.org/postalCodeLookupJSON?placename=' + encodePlace + '&country=US' + '&username=rhsu0268';
-        query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminCode1=DC' + '&username=rhsu0268';
-        console.log(query);
-
+        else
+        {
+            // build the query string - be sure results are only from DC
+            //var query = 'http://api.geonames.org/postalCodeLookupJSON?placename=' + encodePlace + '&country=US' + '&username=rhsu0268';
+            query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminCode1=DC' + '&username=rhsu0268';
+            console.log(query);
+        }
 
 
         $http({method: 'GET', url: query})
@@ -127,7 +127,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
                 if (data.geonames.length == 0)
                 {
                     $scope.error = true;
-                    console.log("Sorry, your search yields no results");
+                    console.log("We currently support only Washington, DC and will be adding more cities to Wander soon!");
                     $scope.resultsCount = 0;
                     $scope.queryResult = null;
                     return;
