@@ -1,5 +1,5 @@
 
-var app = angular.module('searchFunction', ['ngResource', 'ui.router']);
+var app = angular.module('searchFunction', ['ngResource', 'ui.router', 'angularUtils.directives.dirPagination']);
 
 /*
 app.factory('searchResults', ['$http', function($http) {
@@ -53,7 +53,27 @@ app.config([
     }
 ]);
 
-app.controller('MainCtrl', ['$scope', '$http', '$state', '$sce', function($scope, $http, $state, $sce) {
+
+// create a searchResultsService
+app.factory('userQuery', [function() {
+
+    var userQueryService = {
+        userQuery: []
+    };
+
+    userQueryService.sendData = function(data)
+    {
+        userQueryService.userQuery = data;
+    }
+    userQueryService.getData = function()
+    {
+        return userQueryService.userQuery;
+    }
+    return userQueryService;
+
+}]);
+
+app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($scope, $http, $state, userQuery) {
 
     $scope.error = false;
 
@@ -119,8 +139,21 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', '$sce', function($scope
                 $scope.queryResult = data.geonames;
                 console.log($scope.queryResult);
 
-                //var numberOfPages = calculatePages($scope.resultsCount);
+                var queryResults = data.geonames;
+                var queryResultsArray = [];
+                angular.forEach(queryResults, function(value, key) {
 
+                    this.push(key + ': ' + value);
+
+                }, queryResultsArray);
+
+                console.log(queryResultsArray);
+
+                //var numberOfPages = calculatePages($scope.resultsCount);
+                userQuery.sendData(queryResults);
+                console.log(userQuery.getData());
+
+                $scope.$broadcast("searchClicked");
 
 
 
@@ -163,3 +196,71 @@ function calculatePages(resultsCount)
     console.log(Math.round(resultsCount / 10));
     return Math.round(resultsCount / 10);
 }
+
+
+
+
+function OtherController($scope) {
+  $scope.pageChangeHandler = function(num) {
+    console.log('going to page ' + num);
+  };
+}
+
+app.controller('MyController', ['$scope', 'userQuery', function ($scope, userQuery) {
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+  $scope.meals = [];
+  $scope.$on("searchClicked", function(event, args)
+  {
+    $scope.meals = userQuery.getData();
+  });
+
+
+  var dishes = [
+    'noodles',
+    'sausage',
+    'beans on toast',
+    'cheeseburger',
+    'battered mars bar',
+    'crisp butty',
+    'yorkshire pudding',
+    'wiener schnitzel',
+    'sauerkraut mit ei',
+    'salad',
+    'onion soup',
+    'bak choi',
+    'avacado maki'
+  ];
+
+  var sides = [
+    'with chips',
+    'a la king',
+    'drizzled with cheese sauce',
+    'with a side salad',
+    'on toast',
+    'with ketchup',
+    'on a bed of cabbage',
+    'wrapped in streaky bacon',
+    'on a stick with cheese',
+    'in pitta bread'
+  ];
+
+  var data = userQuery.getData();
+  console.log(typeof(data));
+  $scope.meals = data.userQuery;
+  console.log($scope.meals);
+  for (var i = 1; i <= 100; i++) {
+    var dish = dishes[Math.floor(Math.random() * dishes.length)];
+    var side = sides[Math.floor(Math.random() * sides.length)];
+    //$scope.meals.push('meal ' + i + ': ' + dish + ' ' + side);
+    //$scope.meals.push(data);
+  }
+
+  //console.log($scope.meals);
+
+  $scope.pageChangeHandler = function(num) {
+      console.log('meals page changed to ' + num);
+  };
+}]);
+app.controller('OtherController', OtherController);

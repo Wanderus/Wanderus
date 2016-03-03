@@ -28,22 +28,45 @@
 
         </div>
     </div>
-    <nav ng-show="resultsCount">
-        <ul class="pagination">
-            <li class="disabled"><a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <!--<div ng-bind-html="listElements()">-->
-            <li>
-                <a ng-click="getNext()" aria-label="Next">
-                   <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
+</div>
+<div ng-controller="MyController" class="my-controller" ng-show="resultsCount">
+  <h1>Sample Paginated Menu</h1>
+
+  <small>this is in "MyController"</small>
+
+
+  <div class="row">
+    <div class="col-xs-4">
+      <h3>Search Page: {{ currentPage }}</h3>
+    </div>
+    <div class="col-xs-4">
+      <label for="search">Search:</label>
+      <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+    </div>
+    <div class="col-xs-4">
+      <label for="search">items per page:</label>
+      <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+    </div>
+  </div>
+  <br>
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <ul>
+        <li dir-paginate="meal in meals | filter:q | itemsPerPage: pageSize" current-page="currentPage">{{ meal }}</li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div ng-controller="OtherController" class="other-controller">
+  <small>this is in "OtherController"</small>
+  <div class="text-center">
+  <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" <%- include dirPagination.tpl.html %></dir-pagination-controls>
+  <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"></dir-pagination-controls>-->
+  </div>
 </div>
 
 <div id="map"></div>
