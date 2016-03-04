@@ -225,7 +225,9 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
 
 app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
 
-    var result = JSON.parse($stateParams.result)
+    var result = JSON.parse($stateParams.result);
+    $scope.name = result.name;
+    $scope.type = result.fclName;
 
 }]);
 
