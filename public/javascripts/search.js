@@ -42,10 +42,9 @@ app.config([
         });
 
         $stateProvider.state('searchResult', {
-            url: '/results',
-            controller: 'ResultsCtrl',
+            url: '/results?result',
             templateUrl: '/searchResult.html',
-
+            controller: 'ResultsCtrl'
 
         });
 
@@ -141,7 +140,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
                 return;
             }
         }
-        
+
         if (feature)
         {
             console.log("You chose a feature.");
@@ -203,7 +202,8 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
 
     $scope.goToResult = function(searchResult)
     {
-        $state.go('searchResult', {result: searchResult});
+        console.log(searchResult);
+        $state.go('searchResult', {'result': JSON.stringify(searchResult) });
     }
 
     $scope.getNext = function()
@@ -223,8 +223,9 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
 
 }]);
 
-app.controller('ResultsCtrl', ['$scope', '$http', function($scope, $http) {
-    console.log(result);
+app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+
+    var result = JSON.parse($stateParams.result)
 
 }]);
 
