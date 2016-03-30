@@ -52,17 +52,7 @@
               'other': 'results'}">
               </ng-pluralize>.
           </div>
-          <div ng-repeat="result in queryResult">
-              <div class="panel panel-default">
-                  <div class="panel-body">
-                      {{result.name}}
-                  </div>
-                  <div class="panel-footer">State: {{result.adminName1}}</div>
-                  <div class="panel-footer">fclName: {{result.fclName}}</div>
-                  <button type="button" class="btn btn-primary" ng-click="goToResult(result)">Go To Result</button>
 
-              </div>
-          </div>
 
       </div>
   </div>
@@ -72,9 +62,7 @@
 </div>
 
 <div ng-controller="MyController" class="my-controller" ng-show="resultsCount">
-  <h1>Sample Paginated Menu</h1>
-
-  <small>this is in "MyController"</small>
+  <h1>Results</h1>
 
 
   <div class="row">
@@ -94,10 +82,10 @@
   <div class="panel panel-default">
     <div class="panel-body">
 
-      <ul>
+      <ol type="1">
         <li dir-paginate="meal in meals | filter:q | itemsPerPage: pageSize" current-page="currentPage">{{ meal }}</li>
 
-      </ul>
+    </ol>
     </div>
   </div>
 </div>
