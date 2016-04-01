@@ -26,6 +26,10 @@ router.get('/paginationDemo', function(req, res, next) {
   res.render('paginationDemo', { title: 'Express' });
 });
 
+router.get('/testGeolocation', function(req, res, next) {
+  res.render('testGeolocation', { title: 'Express' });
+});
+
 
 
 // these are the routes for a sample collection - (we may change these later to fit our needs)
