@@ -75,6 +75,7 @@ app.factory('userQuery', [function() {
 app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($scope, $http, $state, userQuery) {
 
 
+
     var map = L.map('map').setView([38.907347, -77.036591], 13);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
@@ -84,6 +85,24 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id: 'mapbox.streets'
 	}).addTo(map);
+
+    function onLocationFound(e) {
+        var radius = e.accuracy / 2;
+
+        L.marker(e.latlng).addTo(map)
+            .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+        L.circle(e.latlng, radius).addTo(map);
+    }
+
+    function onLocationError(e) {
+        alert(e.message);
+    }
+
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
+
+    map.locate({setView: true, maxZoom: 16});
 
 
 
