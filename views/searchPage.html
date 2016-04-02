@@ -83,7 +83,7 @@
     <div class="panel-body">
 
       <ol type="1">
-        <li dir-paginate="meal in meals | filter:q | itemsPerPage: pageSize" current-page="currentPage">{{ meal.name }}</li>
+        <li dir-paginate="meal in meals | filter:q | itemsPerPage: pageSize" current-page="currentPage"><a ng-href='#here' ng-click='goToResult(meal)'>{{ meal.name }}</a></li>
 
     </ol>
     </div>
