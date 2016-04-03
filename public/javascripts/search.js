@@ -121,8 +121,8 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
             
            
             console.log("lat: " + lat + "long: " + long);
-            L.marker([lat, long]).addTo(map);
-
+            var marker = L.marker([lat, long]).addTo(map);
+            marker.bindPopup("<b>" + value.name + "</b><br>" + value.fcodeName);
             
         });
     }
