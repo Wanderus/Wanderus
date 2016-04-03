@@ -37,7 +37,8 @@ app.config([
         $stateProvider.state('search', {
             url: '',
             templateUrl: '/searchPage.html',
-            controller: 'MainCtrl'
+            controller: 'MainCtrl',
+            reloadOnSearch: false
 
         });
 
@@ -185,13 +186,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
             }
         }
 
-        if (feature)
-        {
-            console.log("You chose a feature.");
-
-            query = 'http://api.geonames.org/searchJSON?q=' + encodePlace + '&country=US' + '&adminCode1=DC' + '&fcode=' + feature + '&username=rhsu0268';
-        }
-        else
+        if (place && state)
         {
             // build the query string - be sure results are only from DC
             //var query = 'http://api.geonames.org/postalCodeLookupJSON?placename=' + encodePlace + '&country=US' + '&username=rhsu0268';
