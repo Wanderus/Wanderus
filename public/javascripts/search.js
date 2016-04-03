@@ -273,7 +273,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
 
 }]);
 
-app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$state', function($scope, $http, $stateParams, $window, $state) {
+app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$location', '$state', function($scope, $http, $stateParams, $window, $location, $state) {
 
     var result = JSON.parse($stateParams.result);
     $scope.name = result.name;
@@ -282,6 +282,7 @@ app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$s
     $scope.goBack = function()
     {
         console.log("back button clicked!");
+            
         $state.go('search');
     }
 
