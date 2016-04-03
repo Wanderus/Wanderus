@@ -104,6 +104,31 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
 
     map.locate({setView: true, maxZoom: 16});
 
+    // function for adding markers
+    
+    function addMarkers(results)
+    {
+        //L.marker([38.907347, -77.036591]).addTo(map);
+        console.log(results);
+
+        angular.forEach(results, function(value, key) {
+
+            var lat = value.lat;
+            var long = value.lng;
+            //L.marker([lat, long]).addTo(map);
+            
+
+            
+           
+            console.log("lat: " + lat + "long: " + long);
+            L.marker([lat, long]).addTo(map);
+
+            
+        });
+    }
+
+    //addMarkers();
+    
 
 
     $scope.getData = function()
@@ -195,15 +220,20 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'userQuery', function($
                 console.log($scope.queryResult);
 
                 var queryResults = data.geonames;
+
+                // put markers on the map
+                addMarkers(queryResults);
+
+                /*
                 var queryResultsArray = [];
                 angular.forEach(queryResults, function(value, key) {
 
                     this.push(key + ': ' + value);
 
                 }, queryResultsArray);
-
+                
                 console.log(queryResultsArray);
-
+                */
                 //var numberOfPages = calculatePages($scope.resultsCount);
                 userQuery.sendData(queryResults);
                 console.log(userQuery.getData());
@@ -291,3 +321,7 @@ app.controller('MyController', ['$scope', 'userQuery', function ($scope, userQue
   };
 }]);
 app.controller('OtherController', OtherController);
+
+
+
+
