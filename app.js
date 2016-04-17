@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 // connect to the database
 var mongoose = require('mongoose');
 require('./models/SavedSearches');
+require('./models/Locations');
 mongoose.connect('mongodb://localhost/wanderus');
 
 var routes = require('./routes/index');

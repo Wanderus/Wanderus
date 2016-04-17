@@ -85,4 +85,43 @@ router.get('/deleteSavedSearches', function(req, res, next) {
 
 });
 
+// seeders for the data
+var Location = mongoose.model('Location');
+var seeder = require('mongoose-seeder');
+var data = require('../data/data.json');
+router.get('/seedData', function(req, res, next) {
+
+   
+   seeder.seed(data, {dropCollections: true}).then(function(dbData) {
+
+        res.json(dbData);
+
+    }).catch(function(err) {
+
+        // handle error
+        return next(err);
+
+    });
+
+});
+
+router.get('/seededData', function(req, res, next) {
+
+  Location.find(function(err, data) {
+        if (err)
+        {
+            return next(err);
+        }
+
+        res.json(data);
+
+    });
+  
+
+});
+
+
+
 module.exports = router;
+
+

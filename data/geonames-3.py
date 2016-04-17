@@ -23,7 +23,7 @@ else:
 	# file creation 
 
 	# open the file for reading and writing - w+
-	data_file = open('processed_data.txt', 'w+')
+	data_file = open('processed_data.json', 'w+')
 
 	# write the json to the file
 	data = resp.json()
@@ -31,9 +31,12 @@ else:
 	geonames = resp.json()['geonames']
 	total_results_count = resp.json()['totalResultsCount']
 
-	#d = {}
+	d = {}
 
-	d = []
+	#d = []
+	d['parks'] = {}
+	#d['parks'].append({'_model': 'Location'})
+	d['parks']['_model'] = 'Location'
 
 	count = 0
 
@@ -66,17 +69,23 @@ else:
 		#json_data = json.dumps([dict(data=item)])
 		#json_data = json.dumps(item)
 		#print(json_data)
-		d.append(item)
+		#d['parks'].append({ 'places' + str(count) : item })
+		d['parks']['places' + str(count)] = item
+		#d['parks'].append(item)
+
+
+		#d['parks']['places' + str(count)].append(item)
 		#d.append(json_data)
 		#data_file.write(item_string + '\n')
 		count = count + 1
 
 	print(d)
+	print(d['parks']['_model'])
 
 
 	#dict_to_json = json.dumps([dict(data=new_data) for new_data in d])
 	dict_to_json = json.dumps(d)
-	print(dict_to_json)
+	#print(dict_to_json)
 
 	# write the data to the file
 	data_file.write(dict_to_json)
