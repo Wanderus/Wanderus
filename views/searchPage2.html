@@ -1,0 +1,55 @@
+<h2>Search Functionality</h2>
+
+<div class="row">
+  <div class="col-md-6">
+      <form>
+          <!--
+          <div class="error" ng-show="error1">You must enter text into the fields to get results!</div>
+          <div class="error" ng-show="error2">We currently support only Washington, DC and will be adding more cities to Wander soon!</div>
+          <div class="error" ng-show="error3">No results found! Try again!</div>
+          -->
+          <div class="form-group">
+              <label>Placename</label>
+              <input type="text" class="form-control" id="searchTerm" placeholder="Search..." ng-model="place">
+          </div>
+          <div class="form-group">
+              <label>State, City, Zipcode</label>
+              <input type="text" class="form-control" id="state" placeholder="" ng-model="state">
+          </div>
+          <!--
+          <div class="form-group">
+              <label>Special Feature</label>
+                 <select class="form-control" ng-model="feature">
+                     <option value=""></option>
+                     <option value="FISH">Fishing Area</option>
+                     <option value="FLLSX">Waterfall</option>
+                     <option value="SPNG">Spring</option>
+                     <option value="SPNT">Hot Spring</option>
+                     <option value="AMUS">Amusement Park</option>
+                     <option value="BTL">Battlefield</option>
+                     <option value="PRK">Park</option>
+                     <option value="RESW">Wildlife Reserve</option>
+                     <option value="TRL">Trail</option>
+                     <option value="AMTH">Amphitheater</option>
+                     <option value="ATHF">Athletic Field</option>
+                     <option value="CARN">Heap of Stones</option>
+                     <option value="CTRCM">Community Center</option>
+                     <option value="GDN">Garden</option>
+                     <option value="MNMT">Monument</option>
+                     <option value="PRKHQ">Park Headquarters</option>
+                     <option value="RECR">Racetrack</option>
+                     <option value="BNCH">Bench</option>
+                 </select>
+             </div>
+             -->
+
+         
+          <button type="submit" class="btn btn-default" ng-click="getData()">Go</button>
+      </form>
+
+  </div>
+  <div class="col-md-6">
+    <div id="map"></div>
+  </div>
+</div>
+
