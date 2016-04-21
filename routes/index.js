@@ -30,6 +30,10 @@ router.get('/testGeolocation', function(req, res, next) {
   res.render('testGeolocation', { title: 'Express' });
 });
 
+router.get('/searchPart2', function(req, res, next) {
+  res.render('searchPart2', { title: 'Express' });
+});
+
 
 
 // these are the routes for a sample collection - (we may change these later to fit our needs)
