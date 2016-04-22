@@ -1,3 +1,5 @@
+//var mongoose = require('mongoose');
+
 var app = angular.module('searchFunction2', ['ngResource', 'ui.router']);
 
 
@@ -14,13 +16,16 @@ app.config([
 
         });
 
-        
+
         $urlRouterProvider.otherwise('search2');
     }
 ]);
 
 
 app.controller('MainCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+
+	// test it out
+    // test it out
 
 
 

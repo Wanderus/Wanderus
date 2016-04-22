@@ -95,7 +95,7 @@ var seeder = require('mongoose-seeder');
 var data = require('../data/data.json');
 router.get('/seedData', function(req, res, next) {
 
-   
+
    seeder.seed(data, {dropCollections: true}).then(function(dbData) {
 
         res.json(dbData);
@@ -120,12 +120,55 @@ router.get('/seededData', function(req, res, next) {
         res.json(data);
 
     });
-  
+
+
+});
+
+var Game = mongoose.model('Game');
+var textSearch = require('mongoose-text-search');
+
+
+router.get('/search2Test', function(req, res, next) {
+
+    // test it out
+    //var Game = mongoose.model('Game', gameSchema);
+
+    Game.create({ title: 'Super Mario 64', tags: ['nintendo', 'mario', '3d'] }, function (err)
+    {
+        if (err) return handleError(err);
+    });
+
+    console.log("success");
+
+
+    Game.search("Super", {title: 1}, {
+    conditions: {title: {$exists: true}},
+    sort: {title: 1},
+    limit: 10
+    }, function(err, data) {
+        // array of finded results
+        console.log(data.results);
+        // count of all matching objects
+        console.log(data.totalCount);
+    });
+
+
+});
+
+router.get('/gameData', function(req, res, next) {
+
+    Game.find(function(err, data) {
+        if (err)
+        {
+            return next(err);
+        }
+
+        res.json(data);
+
+    });
 
 });
 
 
 
 module.exports = router;
-
-

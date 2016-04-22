@@ -1,19 +1,21 @@
+
 var mongoose = require('mongoose');
 
-var textSearch = require('mongoose-text-search');
+var searchPlugin = require('mongoose-search-plugin');
 
 var GameSchema = mongoose.Schema({
-	name: String,
-    tags: [String],
-  	likes: Number,
-  	created: Date
+	title: String,
+    description: String,
+    tags: [String]
 });
 
 
 // give our schema text search capabilties
-GameSchema.plugin(textSearch);
+GameSchema.plugin(searchPlugin, {
+    fields: ['title', 'description', 'tags']
+  });
 
 // add a text index to the tags array
-GameSchema.index({ tags: 'text' });
+//GameSchema.index({ tags: 'text' });
 
 mongoose.model('Game', GameSchema);
