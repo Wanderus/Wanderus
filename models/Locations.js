@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+var searchPlugin = require('mongoose-search-plugin');
+
 var LocationSchema = new mongoose.Schema({
 
     geonameId: String,
@@ -22,5 +24,10 @@ var LocationSchema = new mongoose.Schema({
 
 
 });
+
+// give our schema text search capabilties
+LocationSchema.plugin(searchPlugin, {
+    fields: ['name', 'fclName', 'postal']
+  });
 
 mongoose.model('Location', LocationSchema);

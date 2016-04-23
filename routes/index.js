@@ -169,6 +169,45 @@ router.get('/gameData', function(req, res, next) {
 
 });
 
+var Location = mongoose.model('Location');
+router.get('/search2', function(req, res, next) {
+
+    // test it out
+    //var Game = mongoose.model('Game', gameSchema)
+
+
+
+    console.log("starting sarch!");
+
+
+    Location.search("Rock", {name: 1}, {
+    conditions: {name: {$exists: true}},
+    sort: {name: 1},
+    limit: 10
+    }, function(err, data) {
+        // array of finded results
+        console.log(data.results);
+        // count of all matching objects
+        console.log(data.totalCount);
+    });
+
+
+});
+
+router.get('/deleteLocations', function(req, res, next) {
+
+    Location.remove({}, function(err) {
+        if (err)
+        {
+            return next(err);
+        }
+    });
+        res.send("You have successfully removed all your data");
+
+
+});
+
+
 
 
 module.exports = router;
