@@ -22,7 +22,25 @@ app.config([
 ]);
 
 
-app.controller('MainCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+app.factory('searches', ['$http', function($http) {
+
+    var searchService = {
+            searchResults: []
+    };
+
+    searchService.get = function(userInput)
+    {
+        return $http.get('/searches' + userInput).then(function (res) {
+
+            console.log(res.data);
+            return res.data;
+        });
+    };
+    return searchService;
+
+}]);
+
+app.controller('MainCtrl', ['$scope', '$http', '$state', 'searches', function($scope, $http, $state, searches) {
 
 	// test it out
     // test it out
