@@ -30,7 +30,7 @@ app.factory('searches', ['$http', function($http) {
 
     searchService.get = function(userInput)
     {
-        return $http.get('/searches' + userInput).then(function (res) {
+        return $http.get('/search2/' + userInput).then(function (res) {
 
             console.log(res.data);
             return res.data;
@@ -44,6 +44,17 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'searches', function($s
 
 	// test it out
     // test it out
+    $scope.getData = function()
+    {
+        var place = $scope.place;
+        var state = $scope.state;
+        //console.log("Feature: " + feature);
+        //console.log("State: " + state);
+
+        var searchResults = searches.get(place);
+
+        console.log(searchResults);
+    }
 
 
 

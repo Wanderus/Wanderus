@@ -194,6 +194,33 @@ router.get('/search2', function(req, res, next) {
 
 });
 
+router.get('/search2/:userInput', function(req, res, next) {
+
+    // test it out
+    //var Game = mongoose.model('Game', gameSchema)
+    console.log(req.params.userInput);
+    var userInput = req.params.userInput;
+
+    console.log("starting search!");
+
+
+    Location.search(userInput, {name: 1, fcodeName: 2, lat: 3, lng: 4, }, {
+    conditions: {name: {$exists: true}},
+    sort: {name: 1},
+    limit: 10
+    }, function(err, data) {
+        // array of finded results
+        console.log(data.results);
+        // count of all matching objects
+        console.log(data.totalCount);
+
+        res.json(data);
+    });
+
+
+});
+
+
 router.get('/deleteLocations', function(req, res, next) {
 
     Location.remove({}, function(err) {
