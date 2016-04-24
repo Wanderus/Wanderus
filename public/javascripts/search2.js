@@ -41,6 +41,16 @@ app.factory('search', ['$http', function($http) {
         });
     };
 
+    searchService.sendData = function(data)
+    {
+        searchService.searchResults = data;
+    };
+
+    searchService.getData = function()
+    {
+        return searchService.searchResults;
+    }
+
 
     return searchService;
 
@@ -71,7 +81,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
     // function for adding markers
 
-    function addMarkers(results, L)
+    function addMarkers(results)
     {
         //L.marker([38.907347, -77.036591]).addTo(map);
         console.log(results);
@@ -115,7 +125,13 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
             var queryResults = data.results;
             console.log(queryResults);
-            addMarkers(queryResults, L);
+            addMarkers(queryResults);
+
+            search.sendData(queryResults);
+            console.log(search.getData());
+
+            // broadcast Event that search is clicked
+            $scope.$broadcast("searchClicked");
 
         });
 
@@ -128,14 +144,14 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
 
 
-app.controller('MyController', ['$scope', function ($scope) {
+app.controller('MyController', ['$scope', 'search', function ($scope, search) {
 
   $scope.currentPage = 1;
   $scope.pageSize = 10;
   $scope.meals = [];
   $scope.$on("searchClicked", function(event, args)
   {
-    $scope.meals = userQuery.getData();
+    $scope.meals = search.getData();
   });
 
 
