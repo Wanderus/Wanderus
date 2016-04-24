@@ -22,11 +22,15 @@ app.config([
 ]);
 
 
-app.factory('searches', ['$http', function($http) {
+app.factory('search', ['$http', function($http) {
 
+    var placesData = [];
     var searchService = {
-            searchResults: []
+        searchResults: []
     };
+
+
+    /*var searchResults = [];*/
 
     searchService.get = function(userInput)
     {
@@ -36,24 +40,39 @@ app.factory('searches', ['$http', function($http) {
             return res.data;
         });
     };
+
+
     return searchService;
 
 }]);
 
-app.controller('MainCtrl', ['$scope', '$http', '$state', 'searches', function($scope, $http, $state, searches) {
+app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($scope, $http, $state, search) {
 
+    //$scope.search = search;
 	// test it out
     // test it out
     $scope.getData = function()
     {
+        //var a = {};
+        console.log($scope.results);
         var place = $scope.place;
         var state = $scope.state;
         //console.log("Feature: " + feature);
         //console.log("State: " + state);
+        console.log(search);
 
-        var searchResults = searches.get(place);
+        search.get(place).then(function(data)
+        {
 
-        console.log(searchResults);
+            console.log(data);
+            //a.searchResults = data;
+            //console.log(a.searchResults);
+
+        });
+        //console.log(a.searchResults);
+
+        //$scope.results = searches.searchResults;
+        //console.log($scope.results);
     }
 
 
