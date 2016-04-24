@@ -46,6 +46,18 @@
 
           <button type="submit" class="btn btn-default" ng-click="getData()">Go</button>
       </form>
+      
+      <div id="result">
+          <div ng-show="resultsCount">
+              <!--Your query yielded {{resultsCount}} results.-->
+              Your query yielded {{resultsCount}}
+              <ng-pluralize count="resultsCount"
+              when=
+              "{'1': 'result',
+              'other': 'results'}">
+              </ng-pluralize>.
+          </div>
+      </div>
 
   </div>
   <div class="col-md-6">

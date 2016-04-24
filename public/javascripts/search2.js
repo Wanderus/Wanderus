@@ -52,40 +52,10 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 	// test it out
     // test it out
 
-    // init map
-    initMap();
 
 
-    $scope.getData = function()
-    {
-        //var a = {};
-        console.log($scope.results);
-        var place = $scope.place;
-        var state = $scope.state;
-        //console.log("Feature: " + feature);
-        //console.log("State: " + state);
-        console.log(search);
+    // function to initialize the map
 
-        search.get(place).then(function(data)
-        {
-
-            console.log(data);
-            //a.searchResults = data;
-            //console.log(a.searchResults);
-
-        });
-        //console.log(a.searchResults);
-
-        //$scope.results = searches.searchResults;
-        //console.log($scope.results);
-    }
-
-
-
-}]);
-
-function initMap()
-{
     var map = L.map('map').setView([38.907347, -77.036591], 13);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
@@ -95,7 +65,67 @@ function initMap()
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id: 'mapbox.streets'
 	}).addTo(map);
-}
+
+
+
+
+    // function for adding markers
+
+    function addMarkers(results, L)
+    {
+        //L.marker([38.907347, -77.036591]).addTo(map);
+        console.log(results);
+
+        angular.forEach(results, function(value, key) {
+
+            var lat = value.lat;
+            var long = value.lng;
+            //L.marker([lat, long]).addTo(map);
+
+
+
+
+            console.log("lat: " + lat + "long: " + long);
+            var marker = L.marker([lat, long]).addTo(map);
+            marker.bindPopup("<b>" + value.name + "</b><br>" + value.fcodeName);
+
+        });
+    }
+
+
+
+    $scope.getData = function()
+    {
+        //var a = {};
+        //console.log($scope.results);
+        var place = $scope.place;
+        var state = $scope.state;
+        //console.log("Feature: " + feature);
+        //console.log("State: " + state);
+        //console.log(search);
+
+        search.get(place).then(function(data)
+        {
+
+            //console.log(data);
+            //a.searchResults = data;
+            //console.log(a.searchResults);
+            // track the number of results
+            $scope.resultsCount = data.totalCount;
+
+            var queryResults = data.results;
+            console.log(queryResults);
+            addMarkers(queryResults, L);
+
+        });
+
+    }
+
+
+
+}]);
+
+
 
 
 app.controller('MyController', ['$scope', function ($scope) {
