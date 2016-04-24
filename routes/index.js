@@ -182,8 +182,7 @@ router.get('/search2', function(req, res, next) {
 
     Location.search("Rock", {name: 1}, {
     conditions: {name: {$exists: true}},
-    sort: {name: 1},
-    limit: 10
+    sort: {name: 1}
     }, function(err, data) {
         // array of finded results
         console.log(data.results);
@@ -204,10 +203,9 @@ router.get('/search2/:userInput', function(req, res, next) {
     console.log("starting search!");
 
 
-    Location.search(userInput, {name: 1, fcodeName: 2, lat: 3, lng: 4, }, {
+    Location.search(userInput, {name: 1, fcodeName: 2, lat: 3, lng: 4}, {
     conditions: {name: {$exists: true}},
-    sort: {name: 1},
-    limit: 10
+    sort: {name: 1}
     }, function(err, data) {
         // array of finded results
         console.log(data.results);
@@ -219,6 +217,64 @@ router.get('/search2/:userInput', function(req, res, next) {
 
 
 });
+
+
+router.get('/search2/:placename/:state', function(req, res, next) {
+
+    // test it out
+    //var Game = mongoose.model('Game', gameSchema)
+    console.log(req.params.placename);
+    var placename = req.params.placename;
+    var state = req.params.state;
+
+    var queryString = placename + " " + state;
+    console.log("starting search!");
+
+
+    Location.search(queryString, {fcodeName: 1, lat: 2, lng: 3, postal: 4, adminName1: 5, name: 6},
+    { conditions: {name: {$exists: true}},
+        fields: ["postal", "fcodeName", "adminName1", "name"],
+        sort: {name: 1}
+    }, function(err, data) {
+        // array of finded results
+        console.log(data.results);
+        // count of all matching objects
+        console.log(data.totalCount);
+
+        res.json(data);
+    });
+
+
+});
+
+router.get('/searchState/:state', function(req, res, next) {
+
+    // test it out
+    //var Game = mongoose.model('Game', gameSchema)
+    //console.log(req.params.placename);
+    //var placename = req.params.placename;
+    var state = req.params.state;
+
+    //var queryString = placename + " " + state;
+    console.log("starting search!");
+
+
+    Location.search(state, {fcodeName: 1, lat: 2, lng: 3, postal: 4, adminName1: 5, name: 6},
+    { conditions: {name: {$exists: true}},
+        fields: ["postal", "fcodeName", "adminName1"],
+        sort: {name: 1}
+    }, function(err, data) {
+        // array of finded results
+        console.log(data.results);
+        // count of all matching objects
+        console.log(data.totalCount);
+
+        res.json(data);
+    });
+
+
+});
+
 
 
 router.get('/deleteLocations', function(req, res, next) {

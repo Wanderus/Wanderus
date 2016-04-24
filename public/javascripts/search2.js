@@ -41,6 +41,24 @@ app.factory('search', ['$http', function($http) {
         });
     };
 
+    searchService.getState = function(state)
+    {
+        return $http.get('/searchState/' + state).then(function (res) {
+
+            console.log(res.data);
+            return res.data;
+        });
+    };
+
+    searchService.getWithState = function(placename, state)
+    {
+        return $http.get('/search2/' + placename + "/" + "state").then(function (res) {
+
+            console.log(res.data);
+            return res.data;
+        });
+    };
+
     searchService.sendData = function(data)
     {
         searchService.searchResults = data;
@@ -124,34 +142,94 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
     $scope.getData = function()
     {
-        //var a = {};
-        //console.log($scope.results);
+        $scope.error1 = false;
+        $scope.error2 = false;
+        $scope.error3 = false;
+
+
         var place = $scope.place;
         var state = $scope.state;
-        //console.log("Feature: " + feature);
-        //console.log("State: " + state);
-        //console.log(search);
 
-        search.get(place).then(function(data)
+        if (!place && !state)
         {
+            $scope.error1 = true;
+            console.log("You must enter text into the fields to get results!");
+            $scope.resultsCount = 0;
+            $scope.queryResult = null;
+            return;
+        }
+        else if (place && !state)
+        {
+            search.get(place).then(function(data)
+            {
 
-            //console.log(data);
-            //a.searchResults = data;
-            //console.log(a.searchResults);
-            // track the number of results
-            $scope.resultsCount = data.totalCount;
+                //console.log(data);
+                //a.searchResults = data;
+                //console.log(a.searchResults);
+                // track the number of results
+                $scope.resultsCount = data.totalCount;
 
-            var queryResults = data.results;
-            console.log(queryResults);
-            addMarkers(queryResults);
+                var queryResults = data.results;
+                console.log(queryResults);
+                addMarkers(queryResults);
 
-            search.sendData(queryResults);
-            console.log(search.getData());
+                search.sendData(queryResults);
+                console.log(search.getData());
 
-            // broadcast Event that search is clicked
-            $scope.$broadcast("searchClicked");
+                // broadcast Event that search is clicked
+                $scope.$broadcast("searchClicked");
 
-        });
+            });
+        }
+        else if (place && state)
+        {
+            search.getWithState(place, state).then(function(data)
+            {
+
+                //console.log(data);
+                //a.searchResults = data;
+                //console.log(a.searchResults);
+                // track the number of results
+                $scope.resultsCount = data.totalCount;
+
+                var queryResults = data.results;
+                console.log(queryResults);
+                addMarkers(queryResults);
+
+                search.sendData(queryResults);
+                console.log(search.getData());
+
+                // broadcast Event that search is clicked
+                $scope.$broadcast("searchClicked");
+
+            });
+        }
+        else if (!place && state)
+        {
+            search.getState(state).then(function(data)
+            {
+
+                //console.log(data);
+                //a.searchResults = data;
+                //console.log(a.searchResults);
+                // track the number of results
+                $scope.resultsCount = data.totalCount;
+
+                var queryResults = data.results;
+                console.log(queryResults);
+                addMarkers(queryResults);
+
+                search.sendData(queryResults);
+                console.log(search.getData());
+
+                // broadcast Event that search is clicked
+                $scope.$broadcast("searchClicked");
+
+            });
+        }
+
+
+
 
     }
 
