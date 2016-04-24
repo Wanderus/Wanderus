@@ -3,11 +3,9 @@
 <div class="row">
   <div class="col-md-6">
       <form>
-          <!--
           <div class="error" ng-show="error1">You must enter text into the fields to get results!</div>
           <div class="error" ng-show="error2">We currently support only Washington, DC and will be adding more cities to Wander soon!</div>
           <div class="error" ng-show="error3">No results found! Try again!</div>
-          -->
           <div class="form-group">
               <label>Placename</label>
               <input type="text" class="form-control" id="searchTerm" placeholder="Search..." ng-model="place">
@@ -46,7 +44,6 @@
 
           <button type="submit" class="btn btn-default" ng-click="getData()">Go</button>
       </form>
-      
       <div id="result">
           <div ng-show="resultsCount">
               <!--Your query yielded {{resultsCount}} results.-->
@@ -57,8 +54,9 @@
               'other': 'results'}">
               </ng-pluralize>.
           </div>
-      </div>
 
+
+      </div>
   </div>
   <div class="col-md-6">
     <div id="map"></div>
@@ -91,5 +89,13 @@
 
     </ol>
     </div>
+  </div>
+</div>
+
+<div ng-controller="OtherController" class="other-controller" ng-show="resultsCount">
+
+  <div class="text-center">
+  <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" <%- include dirPagination.tpl.html %></dir-pagination-controls>
+  <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"></dir-pagination-controls>-->
   </div>
 </div>

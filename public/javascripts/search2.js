@@ -141,8 +141,18 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
 }]);
 
+function calculatePages(resultsCount)
+{
+    console.log(Math.round(resultsCount / 10));
+    return Math.round(resultsCount / 10);
+}
 
 
+function OtherController($scope) {
+  $scope.pageChangeHandler = function(num) {
+    console.log('going to page ' + num);
+  };
+}
 
 app.controller('MyController', ['$scope', 'search', function ($scope, search) {
 
@@ -152,6 +162,7 @@ app.controller('MyController', ['$scope', 'search', function ($scope, search) {
   $scope.$on("searchClicked", function(event, args)
   {
     $scope.meals = search.getData();
+    console.log($scope.meals);
   });
 
 
@@ -169,3 +180,4 @@ app.controller('MyController', ['$scope', 'search', function ($scope, search) {
       console.log('meals page changed to ' + num);
   };
 }]);
+app.controller('OtherController', OtherController);
