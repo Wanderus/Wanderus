@@ -1,6 +1,6 @@
 //var mongoose = require('mongoose');
 
-var app = angular.module('searchFunction2', ['ngResource', 'ui.router']);
+var app = angular.module('searchFunction2', ['ngResource', 'ui.router', 'angularUtils.directives.dirPagination']);
 
 
 app.config([
@@ -98,9 +98,28 @@ function initMap()
 }
 
 
-/*
-app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$location', '$state', function($scope, $http, $stateParams, $window, $location, $state) {
+app.controller('MyController', ['$scope', function ($scope) {
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+  $scope.meals = [];
+  $scope.$on("searchClicked", function(event, args)
+  {
+    $scope.meals = userQuery.getData();
+  });
 
 
+
+
+  //var data = userQuery.getData();
+  //console.log(typeof(data));
+  //$scope.places = data.userQuery;
+  //console.log($scope.places);
+
+
+  //console.log($scope.meals);
+
+  $scope.pageChangeHandler = function(num) {
+      console.log('meals page changed to ' + num);
+  };
 }]);
-*/
