@@ -16,6 +16,13 @@ app.config([
 
         });
 
+        $stateProvider.state('searchResult', {
+            url: '/results?result',
+            templateUrl: '/searchResult.html',
+            controller: 'ResultsCtrl'
+
+        });
+
 
         $urlRouterProvider.otherwise('search2');
     }
@@ -343,6 +350,12 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
 
         });
 
+        $scope.goToResult = function(searchResult)
+        {
+            console.log(searchResult);
+            $state.go('searchResult', {'result': JSON.stringify(searchResult) });
+        }
+
 
 
 
@@ -351,6 +364,21 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
 
 
 
+
+}]);
+
+app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$location', '$state', function($scope, $http, $stateParams, $window, $location, $state) {
+
+    var result = JSON.parse($stateParams.result);
+    $scope.name = result.name;
+    $scope.fcodeName = result.fcodeName;
+
+    //$scope.goBack = function()
+    //{
+        //console.log("back button clicked!");
+            
+        //$state.go('search');
+    //}
 
 }]);
 
