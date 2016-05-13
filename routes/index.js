@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+
+// seeders for the data
+var Location = mongoose.model('Location');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -34,11 +38,27 @@ router.get('/searchPart2', function(req, res, next) {
   res.render('searchPart2', { title: 'Express' });
 });
 
+router.get('/result/:id', function(req, res, next) {
+
+  
+    var id = req.params.id;
+
+    Location.find({_id: id}, function(err, result)
+    {
+        if (err)
+        {
+            return next(err);
+        }
+
+        return res.send("On the resultpage: " + id + result);
+    });
+});
+
 
 
 // these are the routes for a sample collection - (we may change these later to fit our needs)
 
-var mongoose = require('mongoose');
+
 var SavedSearch = mongoose.model('SavedSearch');
 
 router.get('/createSavedSearch', function(req, res, next) {
@@ -89,8 +109,7 @@ router.get('/deleteSavedSearches', function(req, res, next) {
 
 });
 
-// seeders for the data
-var Location = mongoose.model('Location');
+
 var seeder = require('mongoose-seeder');
 var data = require('../data/data.json');
 router.get('/seedData', function(req, res, next) {

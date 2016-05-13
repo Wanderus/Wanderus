@@ -182,7 +182,7 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
                 console.log("lat: " + lat + "long: " + long);
                 var marker = L.marker([lat, long]).addTo(map);
                 markers.push(marker);
-                marker.bindPopup("<b>" + results[i].name + "</b><br>" + results[i].fcodeName);
+                marker.bindPopup("<a href='/result/" + results[i]._id + "'><b>" + results[i].name + "</b></a><br>" + results[i].fcodeName);
 
 
             }
@@ -373,12 +373,12 @@ app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$l
     $scope.name = result.name;
     $scope.fcodeName = result.fcodeName;
 
-    //$scope.goBack = function()
-    //{
-        //console.log("back button clicked!");
+    $scope.goBack = function()
+    {
+        console.log("back button clicked!");
             
-        //$state.go('search');
-    //}
+        $state.go('search2');
+    }
 
 }]);
 
