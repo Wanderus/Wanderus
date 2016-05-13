@@ -80,6 +80,17 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 	// test it out
     // test it out
 
+    // create a greenLeaf icon 
+    var greenIcon = L.icon({
+        iconUrl: '../images/leaf-green.png',
+
+        iconSize:     [38, 95], // size of the icon
+        shadowSize:   [50, 64], // size of the shadow
+        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62],  // the same for the shadow
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+
 
 
     // function to initialize the map
@@ -97,7 +108,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
     function onLocationFound(e) {
         var radius = e.accuracy / 2;
 
-        L.marker(e.latlng).addTo(map)
+        L.marker(e.latlng, {icon: greenIcon}).addTo(map)
             .bindPopup("You are within " + radius + " meters from this point").openPopup();
 
         L.circle(e.latlng, radius).addTo(map);
@@ -166,6 +177,11 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
         //     marker.bindPopup("<b>" + value.name + "</b><br>" + value.fcodeName);
 
         // });
+
+        for (var i = 0; i < markers.length; i++)
+        {
+            map.removeLayer(markers[i]);
+        }
     }
 
 
