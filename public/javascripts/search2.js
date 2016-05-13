@@ -113,7 +113,8 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
     map.locate({setView: true, maxZoom: 16});
 
 
-
+    // create an array for markers
+    markers = [];
 
     // function for adding markers
 
@@ -121,6 +122,8 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
     {
         //L.marker([38.907347, -77.036591]).addTo(map);
         console.log(results);
+
+
 
         angular.forEach(results, function(value, key) {
 
@@ -133,15 +136,52 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
             console.log("lat: " + lat + "long: " + long);
             var marker = L.marker([lat, long]).addTo(map);
+            markers.push(marker);
             marker.bindPopup("<b>" + value.name + "</b><br>" + value.fcodeName);
 
         });
+        return markers;
     }
+
+     // function for adding markers
+
+    function deleteMarkers(markers)
+    {
+        console.log("Deleting markers");
+        console.log(markers);
+        //L.marker([38.907347, -77.036591]).addTo(map);
+        // console.log(results);
+
+        // angular.forEach(results, function(value, key) {
+
+        //     var lat = value.lat;
+        //     var long = value.lng;
+        //     //L.marker([lat, long]).addTo(map);
+
+
+
+
+        //     console.log("lat: " + lat + "long: " + long);
+        //     var marker = L.marker([lat, long]).addTo(map);
+        //     marker.bindPopup("<b>" + value.name + "</b><br>" + value.fcodeName);
+
+        // });
+    }
+
+
 
 
 
     $scope.getData = function()
     {
+
+        // clear markers
+
+        if (markers.length != 0)
+        {
+            deleteMarkers(markers);
+        }
+
         $scope.error1 = false;
         $scope.error2 = false;
         $scope.error3 = false;
