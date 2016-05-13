@@ -21,6 +21,8 @@ app.config([
     }
 ]);
 
+var resultsIndexes;
+
 
 app.factory('search', ['$http', function($http) {
 
@@ -67,14 +69,23 @@ app.factory('search', ['$http', function($http) {
     searchService.getData = function()
     {
         return searchService.searchResults;
-    }
+    };
 
+    searchService.sendPageNumber = function(num)
+    {
+       searchService.pageNumber = num;
+    };
+
+    searchService.getPageNumber = function()
+    {
+       return searchService.pageNumber;
+    };
 
     return searchService;
 
 }]);
 
-app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($scope, $http, $state, search) {
+app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search', function($scope, $rootScope, $http, $state, search) {
 
     //$scope.search = search;
 	// test it out
@@ -129,28 +140,46 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
     // function for adding markers
 
-    function addMarkers(results)
+    $scope.addMarkers = function(results, start, end)
     {
         //L.marker([38.907347, -77.036591]).addTo(map);
         console.log(results);
+        //console.log(start);
+
+
+        if (results.length < 10)
+        {
+            angular.forEach(results, function(value, key) {
+
+                var lat = value.lat;
+                var long = value.lng;
+                //L.marker([lat, long]).addTo(map);
 
 
 
-        angular.forEach(results, function(value, key) {
 
-            var lat = value.lat;
-            var long = value.lng;
-            //L.marker([lat, long]).addTo(map);
+                console.log("lat: " + lat + "long: " + long);
+                var marker = L.marker([lat, long]).addTo(map);
+                markers.push(marker);
+                marker.bindPopup("<b>" + value.name + "</b><br>" + value.fcodeName);
+
+            });
+        }
+        else 
+        {
+            console.log(start);
+            for (var i = start; i < end; i++)
+            {
+                var lat = results[i].lat;
+                var long = results[i].lng;
+                console.log("lat: " + lat + "long: " + long);
+                var marker = L.marker([lat, long]).addTo(map);
+                markers.push(marker);
+                marker.bindPopup("<b>" + results[i].name + "</b><br>" + results[i].fcodeName);
 
 
-
-
-            console.log("lat: " + lat + "long: " + long);
-            var marker = L.marker([lat, long]).addTo(map);
-            markers.push(marker);
-            marker.bindPopup("<b>" + value.name + "</b><br>" + value.fcodeName);
-
-        });
+            }
+        }
         return markers;
     }
 
@@ -227,7 +256,9 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
                 var queryResults = data.results;
                 console.log(queryResults);
-                addMarkers(queryResults);
+                var start = 0;
+                var end = 10;
+                $scope.addMarkers(queryResults, start, end);
 
                 search.sendData(queryResults);
                 console.log(search.getData());
@@ -250,7 +281,9 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
                 var queryResults = data.results;
                 console.log(queryResults);
-                addMarkers(queryResults);
+                var start = 0;
+                var end = 10;
+                $scope.addMarkers(queryResults, start, end);
 
                 search.sendData(queryResults);
                 console.log(search.getData());
@@ -273,7 +306,9 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
 
                 var queryResults = data.results;
                 console.log(queryResults);
-                addMarkers(queryResults);
+                var start = 0;
+                var end = 10;
+                $scope.addMarkers(queryResults, start, end);
 
                 search.sendData(queryResults);
                 console.log(search.getData());
@@ -284,10 +319,36 @@ app.controller('MainCtrl', ['$scope', '$http', '$state', 'search', function($sco
             });
         }
 
+        // $scope.$on("newPageClicked", function(event, args)
+        // {
+        //     console.log("newpage clicked");
+        //     var num = search.getPageNumber();
+        //     console.log(num);
+        // });
+
+        $rootScope.$on('addMarkers', function() {
+            console.log("Add Markers");
+
+            // delete the markers on the map 
+            deleteMarkers(markers);
+
+
+            var data = search.getData();
+            console.log(data);
+            var pageNumber = search.getPageNumber();
+            console.log(pageNumber);
+            var indexes = getResultIndex(pageNumber);
+            console.log(indexes);
+            $scope.addMarkers(data, indexes[0], indexes[1]);
+
+        });
+
+
 
 
 
     }
+
 
 
 
@@ -300,9 +361,22 @@ function calculatePages(resultsCount)
 }
 
 
-function OtherController($scope) {
+function OtherController($scope, search, $rootScope) {
   $scope.pageChangeHandler = function(num) {
     console.log('going to page ' + num);
+    resultsIndexes = getResultIndex(num);
+    //$scope.$broadcast("newPageClicked");
+    var data = search.getData();
+    console.log(data);
+    search.sendPageNumber(num);
+    console.log(search.getPageNumber());
+
+    
+    //$scope.$broadcast("newPageClicked");
+    $rootScope.$emit('addMarkers', {});
+
+
+    
   };
 }
 
@@ -333,3 +407,43 @@ app.controller('MyController', ['$scope', 'search', function ($scope, search) {
   };
 }]);
 app.controller('OtherController', OtherController);
+
+
+function getResultIndex(num)
+{
+    resultsStartEnd = [];
+    switch (num)
+    {
+        case 1:
+            resultsStartEnd.push(0, 10);
+            break;
+        case 2:
+            resultsStartEnd.push(10, 20);
+            break;
+        case 3:
+            resultsStartEnd.push(20, 30);
+            break;
+        case 4:
+            resultsStartEnd.push(30, 40);
+            break;
+        case 5:
+            resultsStartEnd.push(40, 50);
+            break;
+        case 6:
+            resultsStartEnd.push(50, 60);
+            break;
+        case 7:
+            resultsStartEnd.push(60, 70);
+            break;
+        case 8:
+            resultsStartEnd.push(70, 80);
+            break;
+        case 9:
+            resultsStartEnd.push(80, 90);
+            break;
+        case 10:
+            resultsStartEnd.push(90, 100);
+            break;
+    }
+    return resultsStartEnd;
+}
