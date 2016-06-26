@@ -310,6 +310,12 @@ router.get('/deleteLocations', function(req, res, next) {
 });
 
 
+var passport = require('passport');
+var User = mongoose.model('User');
+var jwt = require('express-jwt');
+var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
+
+
 // logging in and logging out
 // logging and logging out
 router.post('/register', function(req, res, next) {
