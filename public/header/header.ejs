@@ -4,16 +4,16 @@
             <a class="navbar-brand" href="#">Wanderus</a>
         </div>
         <ul class="nav navbar-nav">
-            <li ng-hide="isLoggedIn()"><a href="/">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li ng-show="isLoggedIn()"><a href="userHome">User's Home</a></li>
-            <li ng-show="isLoggedIn()"><a href="search">Search</a></li>
-            <li ng-show="isLoggedIn()"><a href="searchPart2">Search - Part 2</a></li>
+            <li><a href="search">Search</a></li>
+            <li><a href="searchPart2">Search - Part 2</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
+            <li><a>{{ currentUser() }}</a></li>
             <li ng-show="isLoggedIn()"><a href="/" ng-click="logOut()">Logout</a></li>
-      		<li ng-hide="isLoggedIn()"><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      		<li ng-hide="isLoggedIn()"><a href=/login><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      		<li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      		<li><a href=/login><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     	</ul>
     </div>
 </nav>

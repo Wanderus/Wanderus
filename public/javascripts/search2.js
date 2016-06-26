@@ -98,7 +98,7 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
 	// test it out
     // test it out
 
-    // create a greenLeaf icon 
+    // create a greenLeaf icon
     var greenIcon = L.icon({
         iconUrl: '../images/leaf-green.png',
 
@@ -156,6 +156,7 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
 
         if (results.length < 10)
         {
+            var i = 1;
             angular.forEach(results, function(value, key) {
 
                 var lat = value.lat;
@@ -168,11 +169,11 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
                 console.log("lat: " + lat + "long: " + long);
                 var marker = L.marker([lat, long]).addTo(map);
                 markers.push(marker);
-                marker.bindPopup("<b>" + value.name + "</b><br>" + value.fcodeName);
-
+                marker.bindPopup("<b>" + i + '. ' + value.name + "</b><br>" + value.fcodeName);
+                i += 1;
             });
         }
-        else 
+        else
         {
             console.log(start);
             for (var i = start; i < end; i++)
@@ -182,7 +183,7 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
                 console.log("lat: " + lat + "long: " + long);
                 var marker = L.marker([lat, long]).addTo(map);
                 markers.push(marker);
-                marker.bindPopup("<a href='/result/" + results[i]._id + "'><b>" + results[i].name + "</b></a><br>" + results[i].fcodeName);
+                marker.bindPopup(i + '. ' + "<a href='/result/" + results[i]._id + "'><b>" + results[i].name + "</b></a><br>" + results[i].fcodeName);
 
 
             }
@@ -336,7 +337,7 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
         $rootScope.$on('addMarkers', function() {
             console.log("Add Markers");
 
-            // delete the markers on the map 
+            // delete the markers on the map
             deleteMarkers(markers);
 
 
@@ -376,7 +377,7 @@ app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$l
     $scope.goBack = function()
     {
         console.log("back button clicked!");
-            
+
         $state.go('search2');
     }
 
@@ -399,12 +400,12 @@ function OtherController($scope, search, $rootScope) {
     search.sendPageNumber(num);
     console.log(search.getPageNumber());
 
-    
+
     //$scope.$broadcast("newPageClicked");
     $rootScope.$emit('addMarkers', {});
 
 
-    
+
   };
 }
 

@@ -177,6 +177,14 @@ router.get('/search2Test', function(req, res, next) {
         console.log(data.totalCount);
     });
 
+    // var options = {
+    //     project: 'title',
+    //     filter: ''
+    //
+    // };
+
+    //Game.textSearch('game -mario', )
+
 
 });
 
@@ -205,8 +213,8 @@ router.get('/search2', function(req, res, next) {
     console.log("starting sarch!");
 
 
-    Location.search("Rock", {name: 1}, {
-    conditions: {name: {$exists: true}},
+    Location.textSearch("Rock", {name: 1, fcodeName: 2, lat: 3, lng: 4}, {
+    filter: {name: {$exists: true}},
     sort: {name: 1}
     }, function(err, data) {
         // array of finded results
@@ -225,7 +233,7 @@ router.get('/search2/:userInput', function(req, res, next) {
     console.log(req.params.userInput);
     var userInput = req.params.userInput;
 
-    console.log("starting search!");
+    console.log("place only!");
 
 
     Location.search(userInput, {name: 1, fcodeName: 2, lat: 3, lng: 4}, {
