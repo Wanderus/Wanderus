@@ -369,6 +369,21 @@ router.post('/login', function(req, res, next) {
 });
 
 
+// test route to look at users
+router.get('/users', function(req, res, next) {
+
+    User.find(function(err, workouts) {
+        if (err)
+        {
+            return next(err);
+        }
+
+        res.json(workouts);
+
+    });
+
+});
+
 
 
 module.exports = router;

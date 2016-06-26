@@ -9,7 +9,7 @@ app.controller('MainCtrl', ['$scope', function($scope) {
 
 }]);
 
-app.controller('AuthCtrl', ['$scope', '$state', 'auth', function($scope, $state, auth)
+app.controller('AuthCtrl', ['$scope', '$state', 'auth', '$location', function($scope, $state, auth, $location)
 {
 
     $scope.user = {};
