@@ -5,6 +5,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li ng-hide="isLoggedIn()"><a href="/">Home</a></li>
+            <li ng-show="isLoggedIn()"><a href="userHome">User's Home</a></li>
             <li ng-show="isLoggedIn()"><a href="search">Search</a></li>
             <li ng-show="isLoggedIn()"><a href="searchPart2">Search - Part 2</a></li>
         </ul>
