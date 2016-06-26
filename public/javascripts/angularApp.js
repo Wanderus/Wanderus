@@ -1,15 +1,57 @@
 var app = angular.module('angularApp', ['ui.router']);
 
+/*
+app.config([
+    '$stateProvider',
+    '$urlRouterProvider',
+    '$window',
+    function($stateProvider, $urlRouterProvider)
+    {
 
-app.controller('MainCtrl', ['$scope', function($scope) {
-    $scope.name = "World";
+        $stateProvider.state('userHome', {
+            url: '/userHome',
+            controller: 'MainCtrl'
 
 
+        });
 
+        $stateProvider.state('login', {
+            url: '/login',
+            controller: 'AuthCtrl',
+            onEnter: ['$state', 'auth', function($state, auth) {
+                if (auth.isLoggedIn())
+                {
+                    $window.location.href = '/userHome';
+                }
+            }]
 
+        });
+
+        $stateProvider.state('register', {
+            url: '/register',
+            controller: 'AuthCtrl',
+            onEnter: ['$state', 'auth', function($state, auth) {
+                if (auth.isLoggedIn())
+                {
+                    $window.location.href = '/userHome';
+                }
+            }]
+
+        });
+
+        $urlRouterProvider.otherwise('home');
+
+    }
+
+]);
+*/
+
+app.controller('MainCtrl', ['$scope', '$state', 'auth', '$window', function($scope, $state, auth, $window)
+{
+    console.log("MainCtrl");
 }]);
 
-app.controller('AuthCtrl', ['$scope', '$state', 'auth', '$location', function($scope, $state, auth, $location)
+app.controller('AuthCtrl', ['$scope', '$state', 'auth', '$window', function($scope, $state, auth, $window)
 {
 
     $scope.user = {};
@@ -25,7 +67,7 @@ app.controller('AuthCtrl', ['$scope', '$state', 'auth', '$location', function($s
         }).then(function() {
 
             //$state.go('home');
-            $location.url('/searchPart2');
+            $window.location.href = '/userHome';
         });
     };
 
@@ -34,7 +76,7 @@ app.controller('AuthCtrl', ['$scope', '$state', 'auth', '$location', function($s
         auth.logIn($scope.user).error(function(error) {
             $scope.error = error;
         }).then(function() {
-            $state.go('home');
+            $window.location.href = '/userHome';
         });
     };
 

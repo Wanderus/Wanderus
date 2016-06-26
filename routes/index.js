@@ -24,6 +24,10 @@ router.get('/home', function(req, res, next) {
   res.render('home', { title: 'Express' });
 });
 
+router.get('/userHome', function(req, res, next) {
+  res.render('userHome', { title: 'Home' });
+});
+
 router.get('/search', function(req, res, next) {
   res.render('search', { title: 'Express' });
 });
