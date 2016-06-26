@@ -7,20 +7,19 @@
     </head>
     <body ng-app="angularApp">
         <div ng-include src="'/header/header.ejs'"></div>
-        <div ng-controller="MainCtrl">
 
 
 
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3" ng-controller="AuthCtrl">
         <div class="page-header">
             <h1>Login</h1>
         </div>
 
         <div ng-show="error" class="alert alert-danger row">
-            <!--<span style="color:blue">{{error.message}}</span>-->
+            <span style="color:blue">{{error.message}}</span>
         </div>
 
-        <form ng-submit="register()" style="margin-top:30px">
+        <form ng-submit="login()" style="margin-top:30px">
             <h3>Login</h3>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
@@ -28,7 +27,7 @@
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
     <!-- jQuery library -->
