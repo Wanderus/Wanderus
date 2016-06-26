@@ -21,16 +21,16 @@
             <!--/parallax 1-->
 
             <div class="container">
-  
+
             <hr>
-          
+
             <div class="row">
                 <div class="col-md-4">
                   <div class="panel panel-default">
                     <div class="panel-heading"><h3>Hello.</h3></div>
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+                    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
                     Aliquam in felis sit amet augue.
                     </div>
                     <div class="panel-footer text-right"><a href="#" class="btn btn-default">More</a></div>
@@ -39,9 +39,9 @@
                 <div class="col-md-4">
                     <div class="panel panel-default">
                     <div class="panel-heading"><h3>Hello.</h3></div>
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+                    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
                     Aliquam in felis sit amet augue.
                     </div>
                     <div class="panel-footer text-right"><a href="#" class="btn btn-default">More</a></div>
@@ -50,23 +50,68 @@
                 <div class="col-md-4">
                     <div class="panel panel-default">
                     <div class="panel-heading"><h3>Hello.</h3></div>
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+                    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
                     Aliquam in felis sit amet augue.
                     </div>
                     <div class="panel-footer text-right"><a href="#" class="btn btn-default">More</a></div>
                   </div>
                 </div>
             </div><!--/row-->
-          
+
             <hr>
-          
+
         </div><!--/container-->
 
-<div class="divider"></div>
+        <div class="divider"></div>
 
         </div>
+        <ui-view></ui-view>
+        <script type="text/ng-template" id="/register.html">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="page-header">
+                <h1>GETfit</h1>
+            </div>
+
+            <div ng-show="error" class="alert alert-danger row">
+                <span style="color:blue">{{error.message}}</span>
+            </div>
+
+            <form ng-submit="register()" style="margin-top:30px">
+                <h3>Register</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+        </script>
+        <script type="text/ng-template" id="/login.html">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="page-header">
+                <h1>GETfit</h1>
+            </div>
+
+            <div ng-show="error" class="alert alert-danger row">
+                <span style="color:blue">{{error.message}}</span>
+            </div>
+
+            <form ng-submit="logIn()" style="margin-top:30px">
+                <h3>Login</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+        </script>
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
