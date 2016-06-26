@@ -11,6 +11,7 @@ var mongoose = require('mongoose');
 require('./models/SavedSearches');
 require('./models/Locations');
 require('./models/Games');
+require('./models/Users');
 mongoose.connect('mongodb://localhost/wanderus');
 
 var routes = require('./routes/index');
