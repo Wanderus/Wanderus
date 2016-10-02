@@ -7,41 +7,45 @@ var Location = mongoose.model('Location');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 
 
 router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Login' });
+    res.render('login', { title: 'Login' });
 });
 
 router.get('/register', function(req, res, next) {
-  res.render('register', { title: 'Register' });
+    res.render('register', { title: 'Register' });
 });
 
 
 router.get('/home', function(req, res, next) {
-  res.render('home', { title: 'Express' });
+    res.render('home', { title: 'Express' });
 });
 
 router.get('/userHome', function(req, res, next) {
-  res.render('userHome', { title: 'Home' });
+    res.render('userHome', { title: 'Home' });
+});
+
+router.get('/profile', function(req, res, next) {
+    res.render('profile', { title: 'Profile' });
 });
 
 router.get('/search', function(req, res, next) {
-  res.render('search', { title: 'Express' });
+    res.render('search', { title: 'Express' });
 });
 
 router.get('/paginationDemo', function(req, res, next) {
-  res.render('paginationDemo', { title: 'Express' });
+    res.render('paginationDemo', { title: 'Express' });
 });
 
 router.get('/testGeolocation', function(req, res, next) {
-  res.render('testGeolocation', { title: 'Express' });
+    res.render('testGeolocation', { title: 'Express' });
 });
 
 router.get('/searchPart2', function(req, res, next) {
-  res.render('searchPart2', { title: 'Express' });
+    res.render('searchPart2', { title: 'Express' });
 });
 
 router.get('/result/:id', function(req, res, next) {
@@ -384,17 +388,30 @@ router.post('/login', function(req, res, next) {
 // test route to look at users
 router.get('/users', function(req, res, next) {
 
-    User.find(function(err, workouts) {
+    User.find(function(err, users) {
         if (err)
         {
             return next(err);
         }
 
-        res.json(workouts);
+        res.json(users);
 
     });
 
 });
+
+router.get('/deleteUsers', function(req, res, next) {
+
+    User.remove({}, function(err) {
+        if (err)
+        {
+            return next(err);
+        }
+    });
+    res.send("You have successfully removed all your data");
+
+});
+
 
 
 

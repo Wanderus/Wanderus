@@ -476,3 +476,19 @@ function getResultIndex(num)
     }
     return resultsStartEnd;
 }
+
+
+app.run( [ '$rootScope', function ($rootScope) {
+    $rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
+        $rootScope.$previousState = from;
+        console.log(from);
+        var queryResults = from
+    });
+}]);
+
+
+/*
+$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+    var queryResults = fromParams;
+});
+*/
