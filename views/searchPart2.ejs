@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="searchFunction2">
     <head>
         <title>Wanderus</title>
         <link rel='stylesheet' href='/stylesheets/search.css' />
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     </head>
-    <body ng-app="searchFunction2">
+    <body>
+        <div ng-include src="'/header/header.ejs'"></div>
         <div class="container">
-            <div ng-include src="'/header/header.ejs'"></div>
+
             <ui-view></ui-view>
             <script type="text/ng-template" id="/searchPage2.html">
                 <%- include searchPage2.html %>

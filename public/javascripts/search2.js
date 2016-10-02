@@ -7,31 +7,6 @@
 var app = angular.module('searchFunction2', ['ngResource', 'ui.router', 'angularUtils.directives.dirPagination']);
 
 
-app.config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider)
-    {
-        $stateProvider.state('search2', {
-            url: '',
-            templateUrl: '/searchPage2.html',
-            controller: 'MainCtrl',
-            reloadOnSearch: false
-
-        });
-
-        $stateProvider.state('searchResult', {
-            url: '/results?result',
-            templateUrl: '/searchResult.html',
-            controller: 'ResultsCtrl'
-
-        });
-
-
-        $urlRouterProvider.otherwise('search2');
-    }
-]);
-
 
 app.factory('auth', ['$http', '$window', function($http, $window) {
 
@@ -103,13 +78,42 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
 
 }]);
 
+
 app.controller("NavCtrl", ['$scope', 'auth', function($scope, auth) {
 
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.currentUser = auth.currentUser;
-    $scope.logout = auth.logOut;
+    $scope.logOut = auth.logOut;
 
 }]);
+
+app.config([
+    '$stateProvider',
+    '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider)
+    {
+        $stateProvider.state('search2', {
+            url: '',
+            templateUrl: '/searchPage2.html',
+            controller: 'MainCtrl',
+            reloadOnSearch: false
+
+        });
+
+        $stateProvider.state('searchResult', {
+            url: '/results?result',
+            templateUrl: '/searchResult.html',
+            controller: 'ResultsCtrl'
+
+        });
+
+
+        $urlRouterProvider.otherwise('search2');
+    }
+]);
+
+
+
 
 var resultsIndexes;
 

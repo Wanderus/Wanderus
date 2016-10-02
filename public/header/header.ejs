@@ -4,7 +4,7 @@
             <a class="navbar-brand" href="#">Wanderus</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
+            <li ng-hide="isLoggedIn()"><a href="/">Home</a></li>
             <!--<li ng-show="isLoggedIn()"><a href="userHome">User's Home</a></li>-->
             <li ng-show="isLoggedIn()"><a href="profile">Profile</a></li>
             <!--<li ng-show="isLoggedIn()"><a href="search">Search</a></li>-->
