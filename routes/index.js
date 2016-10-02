@@ -376,7 +376,7 @@ router.post('/login', function(req, res, next) {
         }
         else
         {
-            return res.status(401).json(info);
+            return res.status(400).json(info);
         }
 
 

@@ -1,5 +1,4 @@
-
-var app = angular.module('register', []);
+var app = angular.module('login', []);
 
 
 app.factory('auth', ['$http', '$window', function($http, $window) {
@@ -73,16 +72,8 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
 }]);
 
 
-app.controller("NavCtrl", ['$scope', 'auth', function($scope, auth) {
 
-    $scope.isLoggedIn = auth.isLoggedIn;
-    $scope.currentUser = auth.currentUser;
-    $scope.logout = auth.logOut;
-
-}]);
-
-
-app.controller("RegisterCtrl", ['$scope', 'auth', '$location', '$window', function($scope, auth, $location, $window) {
+app.controller("LoginCtrl", ['$scope', 'auth', '$location', '$window', function($scope, auth, $location, $window) {
 
 
     console.log("Auth");
@@ -91,17 +82,25 @@ app.controller("RegisterCtrl", ['$scope', 'auth', '$location', '$window', functi
 
     $scope.error = false;
 
-    $scope.register = function()
+    $scope.logIn = function()
     {
-        auth.register($scope.user).error(function(error) {
+        auth.login($scope.user).error(function(error) {
 
+            console.log(error);
             $scope.error = error;
-
         }).then(function() {
-
             $window.location.href = '/profile';
         });
     }
 
+
+
+}]);
+
+app.controller("NavCtrl", ['$scope', 'auth', function($scope, auth) {
+
+    $scope.isLoggedIn = auth.isLoggedIn;
+    $scope.currentUser = auth.currentUser;
+    $scope.logout = auth.logOut;
 
 }]);
