@@ -12,10 +12,13 @@ require('./models/SavedSearches');
 require('./models/Locations');
 require('./models/Games');
 require('./models/Users');
+require('./config/passport');
 mongoose.connect('mongodb://localhost/wanderus');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+var passport = require('passport');
 
 var app = express();
 

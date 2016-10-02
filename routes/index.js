@@ -358,6 +358,8 @@ router.post('/register', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+    console.log(req.body.username);
+    console.log(req.body.password);
     if (!req.body.username || !req.body.password)
     {
         return res.status(400).json({message: 'Please fill out all fields'});
@@ -367,11 +369,13 @@ router.post('/login', function(req, res, next) {
 
         if (err)
         {
+            console.log(err);
             return next(err);
         }
 
         if (user)
         {
+            console.log(user);
             return res.json({token: user.generateJWT()});
         }
         else
