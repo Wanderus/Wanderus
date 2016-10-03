@@ -416,6 +416,25 @@ router.get('/deleteUsers', function(req, res, next) {
 
 });
 
+router.post('/savePark', function(req, res, next) {
+
+    console.log(req.body);
+    var park = new Park(req.body);
+
+    park.save(function(err, park) {
+        if (err)
+        {
+            return next(err);
+        }
+        res.json("You have successfully saved the park");
+
+    });
+
+
+
+
+});
+
 
 
 

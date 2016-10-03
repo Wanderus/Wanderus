@@ -12,6 +12,7 @@ require('./models/SavedSearches');
 require('./models/Locations');
 require('./models/Games');
 require('./models/Users');
+require('./models/Parks');
 require('./config/passport');
 mongoose.connect('mongodb://localhost/wanderus');
 

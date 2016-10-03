@@ -68,6 +68,17 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
         })
     }
 
+    auth.getUserId = function()
+    {
+        if (auth.isLoggedIn())
+        {
+            var token = auth.getToken();
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+            return payload._id;
+        }
+    }
+
     auth.logOut = function()
     {
         $window.localStorage.removeItem('kelpshell-token');
@@ -75,6 +86,38 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
     }
 
     return auth;
+
+}]);
+
+
+app.factory('parkInfo', ['$http', function($http) {
+
+
+    var fetchedUserInfo;
+    var parkInfoService = {
+        parkInfo: []
+    };
+
+    var self = this;
+
+
+
+    parkInfoService.create = function(parkInfo)
+    {
+        return $http.post('/savePark', parkInfo).success(function (data) {
+
+            //userInfoService.userInfo.push(data);
+            console.log(data);
+
+        });
+    };
+
+
+
+
+    return parkInfoService;
+
+
 
 }]);
 
@@ -455,7 +498,7 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$state', 'search',
 
 }]);
 
-app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$location', '$state', function($scope, $http, $stateParams, $window, $location, $state) {
+app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$location', '$state', 'auth', 'parkInfo', function($scope, $http, $stateParams, $window, $location, $state, auth, parkInfo) {
 
     var result = JSON.parse($stateParams.result);
     $scope.name = result.name;
@@ -466,6 +509,22 @@ app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$l
         console.log("back button clicked!");
 
         $state.go('search2');
+    }
+
+    $scope.savePark = function()
+    {
+
+        console.log("Saving park");
+        console.log($scope.name);
+        console.log($scope.fcodeName);
+
+
+        $scope.parkInfo = {};
+        $scope.parkInfo.parkName = $scope.name;
+        $scope.parkInfo.parkType = $scope.fcodeName;
+        $scope.parkInfo.user = auth.getUserId();
+
+        parkInfo.create($scope.parkInfo);
     }
 
 }]);
