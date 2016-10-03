@@ -112,6 +112,19 @@ app.factory('parkInfo', ['$http', function($http) {
         });
     };
 
+    parkInfoService.get = function(userId)
+    {
+        return $http.get('/parks/' + userId).success(function(res) {
+
+
+            //angular.copy(res.data, userInfoService.userInfo);
+            //console.log(userInfoService.userInfo);
+            //self.setUserInfo(res.data);
+            console.log(res);
+
+        });
+    };
+
 
 
 

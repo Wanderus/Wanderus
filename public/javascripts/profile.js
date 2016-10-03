@@ -78,3 +78,47 @@ app.controller("NavCtrl", ['$scope', 'auth', function($scope, auth) {
     $scope.logOut = auth.logOut;
 
 }]);
+
+app.factory('parkInfo', ['$http', function($http) {
+
+
+    var fetchedUserInfo;
+    var parkInfoService = {
+        parkInfo: []
+    };
+
+    var self = this;
+
+
+
+    parkInfoService.create = function(parkInfo)
+    {
+        return $http.post('/savePark', parkInfo).success(function (data) {
+
+            //userInfoService.userInfo.push(data);
+            console.log(data);
+
+        });
+    };
+
+    parkInfoService.get = function(userId)
+    {
+        return $http.get('/parks/' + userId).success(function(res) {
+
+
+            //angular.copy(res.data, userInfoService.userInfo);
+            //console.log(userInfoService.userInfo);
+            //self.setUserInfo(res.data);
+            console.log(res);
+
+        });
+    };
+
+
+
+
+    return parkInfoService;
+
+
+
+}]);

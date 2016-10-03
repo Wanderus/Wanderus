@@ -436,6 +436,24 @@ router.post('/savePark', function(req, res, next) {
 
 });
 
+router.get('/parks', function(req, res, next) {
+
+    Park.find({user: req.params.userId}, function(err, parkInfo) {
+        if (err)
+        {
+            return next(err);
+        }
+
+		console.log(parkInfo);
+        res.json(parkInfo);
+
+    });
+
+
+
+
+});
+
 
 
 
