@@ -50,6 +50,17 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
         })
     }
 
+    auth.getUserId = function()
+    {
+        if (auth.isLoggedIn())
+        {
+            var token = auth.getToken();
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+            return payload._id;
+        }
+    }
+
 
     auth.login = function(user)
     {
@@ -119,6 +130,32 @@ app.factory('parkInfo', ['$http', function($http) {
 
     return parkInfoService;
 
+
+
+}]);
+
+
+app.controller("ProfileCtrl", ['$scope', 'auth', '$http', 'parkInfo', function($scope, auth, $http, parkInfo) {
+
+    console.log("profile");
+
+    $scope.parkInfo;
+
+    var userId = auth.getUserId();
+    console.log(userId);
+
+    //parkInfo.get()
+
+    parkInfo.get(userId).then(function(res) {
+
+
+        console.log(res.data);
+        $scope.parks = res.data;
+
+
+    });
+
+    //console.log($scope.parkInfo);
 
 
 }]);
