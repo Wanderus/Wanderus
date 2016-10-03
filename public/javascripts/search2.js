@@ -539,6 +539,8 @@ app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$l
 
         console.log($scope.parkInfo);
         parkInfo.create($scope.parkInfo);
+
+        alert("Congrats! You saved a park! Now visit your profile to take a look!");
     }
 
 }]);
