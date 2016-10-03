@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 // seeders for the data
 var Location = mongoose.model('Location');
+var Park = mongoose.model('Park');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -420,7 +421,7 @@ router.post('/savePark', function(req, res, next) {
 
     console.log(req.body);
     var park = new Park(req.body);
-
+    console.log(park);
     park.save(function(err, park) {
         if (err)
         {

@@ -524,6 +524,7 @@ app.controller('ResultsCtrl', ['$scope', '$http', '$stateParams', '$window', '$l
         $scope.parkInfo.parkType = $scope.fcodeName;
         $scope.parkInfo.user = auth.getUserId();
 
+        console.log($scope.parkInfo);
         parkInfo.create($scope.parkInfo);
     }
 
